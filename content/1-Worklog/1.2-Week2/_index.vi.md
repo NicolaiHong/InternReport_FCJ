@@ -1,59 +1,51 @@
 ---
-title: "Worklog Tuần 2"
-date: "2025-09-09T19:53:52+07:00"
-weight: 1
+title: "Nhật ký công việc Tuần 2"
+date: "2025-09-15"
+weight: 2
 chapter: false
 pre: " <b> 1.2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
+### Mục tiêu Tuần 2:
 
-### Mục tiêu tuần 2:
+- Xác định và xác phạm vi cho dự án trò chơi gõ chữ đầu tiên (tính năng cốt lõi, ranh giới microservice, hướng phát triển matchmaking).
+- Xây dựng nền tảng đội: repository chung, backlog khởi tạo, sơ đồ ER, lựa chọn tech stack, phân công ownership.
+- Chuẩn hóa công thức tính WPM và accuracy.
+- Prototype dịch vụ FastAPI: sinh văn bản, ghép câu, chat; kiểm chứng con đường tích hợp với Bedrock.
+- Thiết lập AWS Budgets kèm cảnh báo.
+- Nâng cao khả năng thực hành: Lambda (function URL), VPC (subnet, gateway, peering vs transit), VPC Flow Logs, khái niệm cân bằng tải.
+- Provision Amazon RDS; thiết kế schema và seed dataset cho truy xuất văn bản.
+- Refactor dịch vụ text sang truy xuất dựa trên DB; benchmark so sánh với phương pháp API trước đó.
+- Giới thiệu các thực hành vận hành sớm: phân công vai trò, benchmark, giám sát để đảm bảo khả năng scale.
 
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+### Công việc đã thực hiện trong tuần:
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Ngày | Công việc                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo                                                                                                                                                                                                                                             |
+| ---: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -----------: | --------------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|    2 | - Tổ chức buổi brainstorming nhóm để xác định và ưu tiên ý tưởng cho dự án đầu tiên <br>&emsp; + Chuyển ghi chú từ canvas dự án vào backlog khởi tạo trên bảng quản lý dự án <br>&emsp; + Nghiên cứu và ghi chép các thuật toán cụ thể để tính WPM và accuracy nhằm đảm bảo tính nhất quán <br>&emsp; + Tạo repository chung và thiết lập cấu trúc dự án cơ bản cho các ngôn ngữ và microservice đã chọn <br>&emsp; + Hoàn thiện các phác thảo sơ đồ ER và bắt đầu soạn sơ bộ các schema cơ sở dữ liệu <br>&emsp; + Phân công chính thức người phụ trách lead cho từng microservice để tinh giản quá trình phát triển                                                                                                                                                                                                                                                                             |   09/15/2025 |      09/15/2025 |                                                                                                                                                                                                                                                                |
+|    3 | - Thiết lập AWS Budgets: <br>&emsp; + Xem lại các loại budget (Cost, Usage, RI, v.v.) <br>&emsp; + Định nghĩa ngưỡng chi phí hàng tháng <br>&emsp; + Cấu hình budget trong AWS Console <br>&emsp; + Thiết lập cảnh báo email/SNS <br/> - Tạo web app nhỏ dùng AWS Lambda: <br>&emsp; + Tìm hiểu Lambda và cơ bản về function URL <br>&emsp; + Viết hàm "Hello World" đơn giản <br>&emsp; + Cấu hình hàm và IAM role tương ứng <br>&emsp; + Kích hoạt và kiểm thử endpoint function URL <br/> - Thử nghiệm FastAPI cho microservice: <br>&emsp; + Thực hành theo tutorial FastAPI chính thức <br>&emsp; + Thiết lập môi trường phát triển local <br>&emsp; + Xây dựng API proof-of-concept <br>&emsp; + Triển khai và thử nghiệm các endpoint qua Swagger UI                                                                                                                                       |   09/16/2025 |      09/16/2025 | AWS Lambda:<br/> <https://ap-southeast-1.console.aws.amazon.com/lambda> <br/> AWS Budgets: <br/><https://us-east-1.console.aws.amazon.com/costmanagement/> <br/> FastAPI: <br/> <https://www.coursera.org/learn/packt-mastering-rest-apis-with-fastapi-1xeea/> |
+|    4 | - Tìm hiểu các kiến thức cơ bản về mạng và bảo mật trên AWS <br>&emsp; + Ôn lại khái niệm Amazon VPC như một vùng mạng cô lập trong AWS <br>&emsp; + Hiểu vai trò của subnet và phân biệt subnet public vs private để cấu trúc mạng <br>&emsp; + Nắm mục đích của Internet Gateway (IGW) để cung cấp truy cập internet cho subnet public và NAT Gateway để cho subnet private truy cập internet một cách an toàn <br>&emsp; + Khám phá VPC Flow Logs như công cụ giám sát và gỡ lỗi lưu lượng mạng trong VPC <br>&emsp; + So sánh các phương án kết nối on-premise tới AWS: Site-to-Site VPN (mã hóa qua internet) và Direct Connect (kết nối riêng, private) <br>&emsp; + Hiểu các trường hợp sử dụng VPC Peering (kết nối trực tiếp giữa hai VPC) so với Transit Gateway <br>&emsp; + Nắm khái niệm Elastic Load Balancing (ELB) để phân phối traffic giữa nhiều server nhằm tăng tính sẵn sàng |   09/17/2025 |      09/17/2025 | Module 02-(01 to 03): <br> <https://www.youtube.com/watch?v=O9Ac_vGHquM> <br> <https://www.youtube.com/watch?v=BPuD1l2hEQ4> <br> <https://www.youtube.com/watch?v=CXU8D3kyxIc>                                                                                 |
+|    5 | - Khám phá Amazon Bedrock playground: <br>&emsp; + Xem các foundation model có sẵn (ví dụ: Claude, Titan) <br>&emsp; + Chọn model ứng viên để sinh văn bản <br>&emsp; + Thực nghiệm với các prompt và tham số khác nhau <br>&emsp; + Sinh và phân tích mẫu phản hồi <br/> - Prototype microservice được chỉ định: <br>&emsp; + Thiết kế logic dịch vụ và tích hợp nhiều API để sinh văn bản <br>&emsp; + Triển khai các hàm tạo câu ngẫu nhiên và chức năng chat <br>&emsp; + Đánh giá những hạn chế ban đầu của bản dựng và liệt kê bước tiếp theo để cải tiến <br>&emsp; + Xác thực phương án kỹ thuật đã chọn                                                                                                                                                                                                                                                                                  |   09/18/2025 |      09/18/2025 | Amazon Bedrock:<br/><https://ap-southeast-1.console.aws.amazon.com/bedrock> <br/>                                                                                                                                                                              |
+|    6 | - Khởi tạo và cấu hình Amazon RDS: <br>&emsp; + Xem xét và chọn engine DB phù hợp với nhu cầu dự án <br>&emsp; + Cấu hình các thiết lập chính cho instance, bao gồm credentials, VPC và security group rules <br>&emsp; + Khởi tạo DB, theo dõi quá trình tạo và lưu trữ an toàn endpoint kết nối <br> - Prototype TextService dựa trên DB: <br>&emsp; + Thiết kế schema đơn giản với bảng lưu từ và câu để chứa nội dung văn bản <br>&emsp; + Viết script một lần để populate dữ liệu khởi tạo vào RDS <br>&emsp; + Refactor TextService để truy vấn dữ liệu từ DB thay vì gọi API bên ngoài và thực hiện benchmark cải thiện hiệu năng <br>&emsp; + Chạy benchmark so sánh thời gian phản hồi giữa phương pháp trước (API) và phương pháp mới (DB)                                                                                                                                              |   09/19/2025 |      09/19/2025 | Aurora and RDS: <br/><https://ap-southeast-1.console.aws.amazon.com/rds>                                                                                                                                                                                       |
 
+### Thành tựu Tuần 2:
 
-### Kết quả đạt được tuần 2:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+- Đã xác định phạm vi cho trò chơi gõ chữ đầu tiên:
+  - Tính năng cốt lõi
+  - Ranh giới microservice
+  - Backlog đã được seed
+  - Phân công ownership.
+- Công thức chuẩn cho WPM và accuracy đã được nghiên cứu và ghi chép.
+- Repository chung đã được khởi tạo với cấu trúc đa ngôn ngữ cơ bản.
+- Sơ đồ ER được hoàn thiện và sơ bộ schema quan hệ đã được soạn thảo.
+- Prototype FastAPI đã được giao (sinh văn bản, ghép câu, chat) và kiểm chứng qua Swagger UI.
+- AWS Budgets được cấu hình với ngưỡng hàng tháng và cảnh báo.
+- Nắm vững nền tảng AWS cốt lõi:
+  - Lambda (function URL)
+  - VPC (subnet, IGW, NAT, Flow Logs)
+  - Peering vs Transit Gateway
+  - Khái niệm cân bằng tải
+- Đã khảo sát Amazon Bedrock và xác nhận model ứng viên cùng chiến lược prompt.
+- Instance RDS được khởi tạo, schema tạo xong và dataset seed đã được nạp.
+- TextService được refactor sang truy xuất từ DB và ghi nhận cải thiện hiệu năng ban đầu qua benchmark.
+- Đã giới thiệu các thực hành vận hành sớm: phân công vai trò, tập trung benchmark và cân nhắc khả năng mở rộng.

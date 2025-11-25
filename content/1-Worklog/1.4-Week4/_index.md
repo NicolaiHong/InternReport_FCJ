@@ -1,57 +1,45 @@
 ---
 title: "Week 4 Worklog"
-date: "2025-09-09T19:53:52+07:00"
-weight: 1
+date: "2025-09-29"
+weight: 4
 chapter: false
 pre: " <b> 1.4. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
 
 ### Week 4 Objectives:
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+- Gain hands-on experience configuring Amazon RDS, including VPC setup, security groups, and backup management.
+- Learn how to deploy scalable web applications using Auto Scaling Groups and Application Load Balancers.
+- Strengthen monitoring skills with CloudWatch metrics, logs, alarms, and custom dashboards.
+- Explore hybrid DNS architectures with Route 53 Resolver for enterprise environments.
+- Improve proficiency with AWS CLI for managing resources across S3, EC2, VPC, and IAM.
+- Build end-to-end CI/CD pipelines using CodeCommit, CodeBuild, CodeDeploy, and CodePipeline.
+- Implement automated backup strategies with AWS Backup and lifecycle policies.
+- Deploy containerized applications using Docker and container registries on AWS.
+- Study virtual machine migration workflows, including import and export between environments.
+- Build serverless applications using AWS Lambda and API Gateway with proper IAM configuration.
+- Understand centralized security monitoring using AWS Security Hub and its service integrations.
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+### Tasks Completed This Week:
 
+| Day | Task                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Start Date | Completion Date | Reference Material                                 |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | -------------------------------------------------- |
+| 2   | - **Configure and Manage Amazon RDS:** <br>&emsp; + Configure VPC, security groups, and DB subnet group <br>&emsp; + Launch EC2 and RDS instances <br>&emsp; + Deploy a sample app on EC2 connected to RDS <br>&emsp; + Perform backup and restore operations <br>&emsp; + Clean up all created resources <br><br> - **Deploy a Scalable Web Application using Auto Scaling:** <br>&emsp; + Set up VPC, subnets, and security groups <br>&emsp; + Create an EC2 Launch Template <br>&emsp; + Configure Target Group and Application Load Balancer <br>&emsp; + Create Auto Scaling Group with manual, scheduled, and dynamic policies <br>&emsp; + Clean up all AWS resources <br><br> - **Monitor Resources with CloudWatch:** <br>&emsp; + Analyze metrics using search and math expressions <br>&emsp; + Query logs with CloudWatch Logs Insights <br>&emsp; + Create Metric Filters <br>&emsp; + Configure CloudWatch Alarms <br>&emsp; + Build dashboards for visualization <br>&emsp; + Clean up alarms and dashboards | 29/09/2025 | 29/09/2025      | RDS, Auto Scaling, CloudWatch Labs                 |
+| 3   | - **Implement Hybrid DNS with Route 53 Resolver:** <br>&emsp; + Deploy base infrastructure with CloudFormation <br>&emsp; + Set up Microsoft AD for on-prem DNS simulation <br>&emsp; + Create outbound and inbound Resolver endpoints <br>&emsp; + Configure forwarding rules <br>&emsp; + Test bidirectional name resolution and clean up resources <br><br> - **Manage AWS Services via CLI:** <br>&emsp; + Install and configure AWS CLI <br>&emsp; + Use CLI to manage S3, SNS, IAM resources <br>&emsp; + Perform S3 bucket/object operations <br>&emsp; + Create and manage VPC components <br>&emsp; + Launch and terminate EC2 instances with CLI <br>&emsp; + Clean up all resources                                                                                                                                                                                                                                                                                                                               | 30/09/2025 | 30/09/2025      | Route 53 Resolver, AWS CLI Labs                    |
+| 4   | - **Build a CI/CD Pipeline for Automated Deployment:** <br>&emsp; + Store source code in CodeCommit <br>&emsp; + Configure CodeBuild for compiling and packaging <br>&emsp; + Set up CodeDeploy for automated deployments <br>&emsp; + Orchestrate the full workflow with CodePipeline <br>&emsp; + Test automated deployment with a code push <br>&emsp; + Clean up all pipeline resources <br><br> - **Automate EC2 Backups with AWS Backup:** <br>&emsp; + Deploy infrastructure using CloudFormation <br>&emsp; + Create backup plans with lifecycle rules <br>&emsp; + Configure backup notifications <br>&emsp; + Test backup and restore operations <br>&emsp; + Remove all created backups and stacks                                                                                                                                                                                                                                                                                                                | 01/10/2025 | 01/10/2025      | CodeCommit, CodeBuild, CodeDeploy, AWS Backup Labs |
+| 5   | - **Deploy a Dockerized Application on AWS:** <br>&emsp; + Set up VPC, security groups, IAM roles <br>&emsp; + Launch RDS instance as backend <br>&emsp; + Deploy application on EC2 using Docker image <br>&emsp; + Redeploy using Docker Compose <br>&emsp; + Push image to container registry (ECR or Docker Hub) <br>&emsp; + Clean up resources <br><br> - **Migrate Virtual Machines with Import/Export:** <br>&emsp; + Export an on-prem VM <br>&emsp; + Upload VM image to S3 <br>&emsp; + Import VM to create AMI <br>&emsp; + Launch EC2 from imported AMI <br>&emsp; + Export EC2 instance back to S3 <br>&emsp; + Clean up all resources                                                                                                                                                                                                                                                                                                                                                                         | 02/10/2025 | 02/10/2025      | Docker on AWS, VM Import/Export Labs               |
+| 6   | - **Deploy a Serverless Application using Lambda and API Gateway:** <br>&emsp; + Package and zip Lambda function with dependencies <br>&emsp; + Create IAM execution role <br>&emsp; + Deploy Lambda function <br>&emsp; + Create HTTP API in API Gateway and integrate with Lambda <br>&emsp; + Deploy and test endpoint <br>&emsp; + Clean up Lambda, API, and IAM role <br><br> - **Centralize Security Monitoring with Security Hub:** <br>&emsp; + Enable Security Hub <br>&emsp; + Review aggregated findings and dashboards <br>&emsp; + Analyze detections from GuardDuty, Inspector, and Macie <br>&emsp; + Explore risk summaries and charts                                                                                                                                                                                                                                                                                                                                                                       | 03/10/2025 | 03/10/2025      | Lambda & Security Hub Labs                         |
 
 ### Week 4 Achievements:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+- Successfully deployed Amazon RDS with full networking and backup configuration.
+- Built scalable application infrastructure using Auto Scaling and ALB.
+- Implemented comprehensive CloudWatch monitoring with metrics, logs, alarms, and dashboards.
+- Configured hybrid DNS architecture using Route 53 Resolver and Microsoft AD.
+- Strengthened AWS CLI proficiency across multiple services.
+- Developed automated CI/CD pipelines with AWS developer tools.
+- Implemented lifecycle-based backup strategies with AWS Backup.
+- Deployed Dockerized applications and published container images to ECR.
+- Completed VM migration workflows using import/export features.
+- Built serverless applications with Lambda and API Gateway.
+- Centralized security monitoring using Security Hub with service integrations.

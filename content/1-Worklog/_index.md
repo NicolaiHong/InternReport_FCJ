@@ -20,7 +20,7 @@ pre: " <b> 1. </b> "
 
 **Week 7:** [Deep dive into DynamoDB, IAM federation & cost optimization, Lightsail & containers, Step Functions, Cloud9, Elastic Beanstalk, CI/CD pipelines, and AWS security essentials](1.7-Week7/)
 
-**Week 8:** [Infrastructure as Code with CloudFormation, resilience & auto-scaling, refactoring to microservices, serverless SPA with Cognito & X-Ray, AI services (Polly, Rekognition, Lex), S3 & CloudFront, and CloudWatch dashboards](1.8-Week8/)
+**Week 8:** [Infrastructure as Code with CloudFormation, resilience & auto-scaling, refactoring to microservices, serverless SPA with Cognito & X-Ray, AI services (Polly, Rekognition, Lex), S3 & CloudFront, and CloudWatch dashboards](1.8-week8/)
 
 **Week 9:** [Lex chatbot and SNS pub/sub, DynamoDB & ElastiCache labs, EKS CI/CD & blueprints, serverless & Fargate microservices, storage performance evaluations, S3 security best practices, and a data lake with Glue, Athena & QuickSight](1.9-Week9/)
 

@@ -20,7 +20,7 @@ pre: " <b> 1. </b> "
 
 **Tuần 7:** [Đào sâu DynamoDB, liên kết IAM federation & tối ưu chi phí, Lightsail & containers, Step Functions, Cloud9, Elastic Beanstalk, pipeline CI/CD và nền tảng bảo mật AWS](1.7-Week7/)
 
-**Tuần 8:** [IaC với CloudFormation, độ bền & auto scaling, tách thành microservices, SPA serverless với Cognito & X-Ray, dịch vụ AI (Polly, Rekognition, Lex), S3 & CloudFront, và dashboard CloudWatch](1.8-Week8/)
+**Tuần 8:** [IaC với CloudFormation, độ bền & auto scaling, tách thành microservices, SPA serverless với Cognito & X-Ray, dịch vụ AI (Polly, Rekognition, Lex), S3 & CloudFront, và dashboard CloudWatch](1.8-week8/)
 
 **Tuần 9:** [Chatbot Lex & mô hình pub/sub SNS, lab DynamoDB & ElastiCache, EKS CI/CD & Blueprints, microservices serverless & Fargate, đánh giá hiệu năng lưu trữ, best practices bảo mật S3, và data lake với Glue, Athena & QuickSight](1.9-Week9/)
 

@@ -1,59 +1,58 @@
 ---
-title: "Worklog Tuần 10"
-date: "2025-09-09T19:53:52+07:00"
-weight: 2
+title: "Week 10 Worklog"
+date: "2025-12-05"
+weight: 10
 chapter: false
 pre: " <b> 1.10. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
+### Week 10 Objectives:
 
-### Mục tiêu tuần 10:
+- Deploy and manage containerized workloads using Red Hat OpenShift Service on AWS (ROSA) and establish a fundamental CI/CD workflow.
+- Architect and analyze a comprehensive data platform on AWS utilizing streaming ingestion, Glue, EMR, Athena, QuickSight, and Redshift.
+- Design business intelligence dashboards and enhance observability via Amazon QuickSight, VPC Flow Logs, and delegated billing permissions.
+- Develop and launch cloud-native applications utilizing AWS CDK, event-driven patterns with SNS/SQS, and serverless Lambda functions.
+- Construct full-stack serverless web applications with API Gateway, Lambda, DynamoDB, Cognito, and CloudFront, ensuring SSL security and authentication.
+- Automate order processing workflows and implement CI/CD pipelines for serverless architectures using SQS, SNS, SAM, and CodePipeline.
 
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+### Tasks carried out this week:
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Day | Task                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Start Date | Completion Date | Reference Material                                                                                                                                                                                                                                                                                       |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2   | - **Deploy Applications via Red Hat OpenShift Service on AWS (ROSA)** <br>&emsp; + Enable ROSA service and install required CLI utilities <br>&emsp; + Provision and configure an OpenShift cluster on AWS infrastructure <br>&emsp; + Deploy a sample workload onto the active OpenShift cluster <br>&emsp; + Establish a basic CI/CD pipeline using CodeCommit, CodeBuild, and CodePipeline <br>&emsp; + Configure a dedicated CI/CD workflow for automated application deployment <br><br> - **Construct an Analytics Platform on AWS** <br>&emsp; + Ingest and persist streaming data utilizing Amazon Kinesis Firehose <br>&emsp; + Automate data cataloging with AWS Glue Crawlers <br>&emsp; + Execute data transformations via Glue interactive sessions, Studio, and DataBrew <br>&emsp; + Process big data workloads using Amazon EMR <br>&emsp; + Perform interactive analysis with Amazon Athena and real-time analytics with Kinesis <br>&emsp; + Visualize insights by designing Amazon QuickSight dashboards <br>&emsp; + Serve data via AWS Lambda and architect a data warehouse with Amazon Redshift                                                                                                                                                                             | 11/10/2025 | 11/10/2025      | ROSA Hands-on Lab: <br> <https://000071.awsstudygroup.com/> <br> Analytics Platform: <br> <https://000072.awsstudygroup.com/>                                                                                                                                                                            |
+| 3   | - **Initialize Amazon QuickSight Dashboards** <br>&emsp; + Ingest data and construct initial visualizations including line charts, pie charts, and pivot tables <br>&emsp; + Refine the dashboard with advanced formatting, visual additions, and detailed data tables <br>&emsp; + Implement interactivity by configuring filters, actions, and navigation prior to publishing <br><br> - **Monitor Network Infrastructure via VPC Flow Logs** <br>&emsp; + Configure and activate VPC Flow Logs to capture IP traffic metadata <br>&emsp; + Route flow log streams to Amazon CloudWatch Logs <br>&emsp; + Analyze traffic patterns to diagnose security group effectiveness and network health <br><br> - **Delegate Permissions to the AWS Billing Console** <br>&emsp; + Establish an IAM user group and enable Billing Console access <br>&emsp; + Author a custom IAM policy for granular billing and cost management permissions <br>&emsp; + Attach the policy to the IAM group to finalize delegation <br>&emsp; + Validate the configuration by accessing the console as a delegated user                                                                                                                                                                                                | 11/11/2025 | 11/11/2025      | Amazon QuickSight Guide: <br> <https://000073.awsstudygroup.com/> <br> VPC Flow Logs Lab: <br> <https://000074.awsstudygroup.com/> <br> AWS Billing Console: <br> <https://000075.awsstudygroup.com/>                                                                                                    |
+| 4   | - **Develop Infrastructure as Code with AWS CDK** <br>&emsp; + Bootstrap the environment with IAM Roles and EC2 instances <br>&emsp; + Configure the VSCode development environment <br>&emsp; + Define application architecture (API Gateway, ELB, ECS) using CDK <br>&emsp; + Integrate Lambda logic and S3 storage constructs <br>&emsp; + Optimize structure using nested stacks for reusability <br><br> - **Architect Event-driven Systems with SNS and SQS** <br>&emsp; + Provision core infrastructure and configure event generators <br>&emsp; + Implement a decoupled publish/subscribe model via SNS topics and SQS queues <br>&emsp; + Apply message filtering policies to SNS subscriptions for targeted routing <br>&emsp; + Design complex routing logic using advanced message filtering techniques <br><br> - **Develop Serverless Logic with AWS Lambda** <br>&emsp; + Author a Lambda function for S3-triggered image processing <br>&emsp; + Configure S3 buckets and IAM execution roles for the function <br>&emsp; + Validate the image resizing operations <br>&emsp; + Provision a DynamoDB table for data persistence <br>&emsp; + Implement data writing to DynamoDB via Lambda functions                                                                              | 11/12/2025 | 11/12/2025      | AWS CDK Development: <br> <https://000076.awsstudygroup.com/> <br> Event-driven Architecture Lab: <br> <https://000077.awsstudygroup.com/> <br> Serverless Lambda Guide: <br> <https://000078.awsstudygroup.com/>                                                                                        |
+| 5   | - **Integrate Serverless Frontend with API Gateway** <br>&emsp; + Deploy client-side application assets <br>&emsp; + Provision a DynamoDB table <br>&emsp; + Deploy Lambda handlers for Create, Read, and Delete operations <br>&emsp; + Configure API Gateway methods and enable CORS <br>&emsp; + Validate API endpoints using Postman and the frontend interface <br><br> - **Deploy Serverless Applications via SAM** <br>&emsp; + Automate frontend deployment using SAM <br>&emsp; + Define DynamoDB resources in the template <br>&emsp; + Deploy Lambda functions for listing, writing, deleting, and resizing images <br>&emsp; + Configure GET, POST, and DELETE verbs in API Gateway <br>&emsp; + Execute end-to-end testing via Postman and the web interface <br><br> - **Implement Identity Management with Amazon Cognito** <br>&emsp; + Configure a Cognito User Pool <br>&emsp; + Secure the API and corresponding Lambda function <br>&emsp; + Verify the authentication flow via the frontend application <br><br> - **Configure SSL/TLS for Serverless Applications** <br>&emsp; + Register a custom domain and Route 53 hosted zone <br>&emsp; + Provision an SSL certificate via AWS Certificate Manager <br>&emsp; + Configure a CloudFront distribution for HTTPS delivery | 11/13/2025 | 11/13/2025      | Serverless Frontend with API Gateway: <br> <https://000079.awsstudygroup.com/> <br> Serverless Application with SAM: <br> <https://000080.awsstudygroup.com/> <br> Cognito Authentication Lab: <br> <https://000081.awsstudygroup.com/> <br> SSL Configuration: <br> <https://000082.awsstudygroup.com/> |
+| 6   | - **Automate Order Processing with SQS and SNS** <br>&emsp; + Provision SQS queues and SNS topics <br>&emsp; + Create a DynamoDB table for order persistence <br>&emsp; + Develop Lambda functions for checkout, management, handling, and deletion <br>&emsp; + Validate the complete order processing lifecycle <br><br> - **Construct a CI/CD Pipeline for Serverless Workloads** <br>&emsp; + Initialize a Git repository for the SAM pipeline code <br>&emsp; + Configure the SAM deployment pipeline utilizing AWS CodePipeline <br>&emsp; + Initialize a Git repository for frontend assets <br>&emsp; + Build a deployment pipeline for the frontend application <br>&emsp; + Verify the functionality and stability of the web application                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | 11/14/2025 | 11/14/2025      | Order Processing with SQS and SNS: <br> <https://000083.awsstudygroup.com/> <br> CI/CD Pipeline for Serverless: <br> <https://000084.awsstudygroup.com/>                                                                                                                                                 |
 
+### Week 10 Achievements:
 
-### Kết quả đạt được tuần 10:
+- Deployed applications using Red Hat OpenShift Service on AWS (ROSA) by enabling the service, provisioning a cluster, running sample workloads, and wiring a fundamental CI/CD workflow with CodeCommit, CodeBuild, and CodePipeline.
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+- Architected and explored a data analytics platform on AWS:
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+  - Ingested streaming data via Kinesis Firehose and cataloged it using AWS Glue Crawlers.
+  - Transformed and processed data utilizing Glue (Studio and interactive sessions), DataBrew, and EMR, followed by analysis with Athena and Kinesis Data Analytics.
+  - Visualized insights via QuickSight dashboards and served data through Lambda and Redshift warehousing.
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
+- Enhanced business intelligence and observability:
 
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
+  - Designed interactive QuickSight dashboards featuring diverse charts, formatting, filters, and navigation actions.
+  - Activated and analyzed VPC Flow Logs in CloudWatch to interpret traffic patterns and validate security groups.
+  - Delegated AWS Billing Console access via IAM groups and custom policies, verifying permissions with user testing.
 
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
+- Developed infrastructure and event-driven applications using AWS CDK:
 
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
+  - Established a CDK development environment on EC2 with VSCode and IAM roles, defining architectures for API Gateway, ELB, ECS, Lambda, and S3.
+  - Implemented SNS and SQS event-driven flows, incorporating both basic pub/sub models and advanced message filtering logic.
+  - Created Lambda-based workflows for image processing and data persistence utilizing S3 and DynamoDB.
 
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
+- Built secure, end-to-end serverless application stacks:
 
+  - Deployed frontend apps integrating with API Gateway, Lambda, and DynamoDB using both manual configuration and SAM automation.
+  - Configured API Gateway with CORS, enforced Cognito-based authentication, and validated flows via Postman and UI.
+  - Secured applications with custom domains, Route 53 zones, ACM certificates, and CloudFront HTTPS distributions.
 
+- Implemented automated order processing and CI/CD for serverless systems:
+  - Constructed an order processing pipeline leveraging SQS, SNS, DynamoDB, and Lambda functions for full lifecycle management.
+  - Established CI/CD pipelines for SAM-based backends and frontend applications using CodePipeline, linked to Git repositories for automated deployment.

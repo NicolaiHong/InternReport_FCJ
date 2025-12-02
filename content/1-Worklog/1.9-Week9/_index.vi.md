@@ -1,59 +1,57 @@
 ---
-title: "Worklog Tuần 9"
-date: "2025-09-09T19:53:52+07:00"
-weight: 1
+title: "Nhật ký công việc Tuần 9"
+date: "2025-12-02"
+weight: 9
 chapter: false
 pre: " <b> 1.9. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
+### Mục tiêu Tuần 9:
 
-### Mục tiêu tuần 9:
+- Kiến trúc các giao diện hội thoại và hệ thống hướng sự kiện sử dụng Amazon Lex và Amazon SNS.
+- Triển khai các giải pháp dữ liệu và bộ nhớ đệm được quản lý với DynamoDB và ElastiCache, đồng thời tự động hóa việc triển khai EKS.
+- Thực thi quản trị và khả năng mở rộng thông qua Service Quotas, kiểm soát sử dụng dựa trên IAM và EKS Blueprints.
+- Phát triển và vận hành các khối lượng công việc serverless và container hóa, đồng thời đánh giá hiệu năng lưu trữ giữa S3 và EFS.
+- Bảo mật hạ tầng S3 và thiết lập đường ống data lake cơ bản sử dụng Glue, Athena và QuickSight.
 
-* Kết nối, làm quen với các thành viên trong First Cloud Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+### Các nhiệm vụ đã thực hiện trong tuần:
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Ngày | Nhiệm vụ                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Tài liệu tham khảo                                                                                                                                                                                                   |
+| ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2    | - **Cấu hình Chatbot Amazon Lex** <br>&emsp; + Cung cấp hạ tầng backend và các API cần thiết <br>&emsp; + Khởi tạo và cấu hình một instance chatbot mới trên Amazon Lex <br>&emsp; + Tinh chỉnh các intent (ý định) hội thoại và các loại slot <br>&emsp; + Triển khai Lambda hooks cho logic thực hiện (fulfillment) <br>&emsp; + Xuất bản các bí danh (alias) chatbot để sử dụng thực tế <br> - **Triển khai Mô hình Nhắn tin Publish/Subscribe với Amazon SNS** <br>&emsp; + Triển khai hạ tầng cơ sở thông qua mẫu SAM <br>&emsp; + Cấu hình Amazon SNS Topic để phát tán sự kiện <br>&emsp; + Xây dựng các subscriber tách biệt: Dịch vụ Thông báo, Kế toán và Chuyến đi <br>&emsp; + Áp dụng các chính sách lọc tin nhắn để định tuyến cụ thể <br>&emsp; + Cập nhật các dịch vụ publisher và kiểm tra việc phân phối fan-out                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | 11/03/2025   | 11/03/2025      | Amazon Lex Chatbot: <br> <https://000058.awsstudygroup.com/> <br> Nhắn tin với Amazon SNS: <br> <https://000059.awsstudygroup.com/>                                                                                  |
+| 3    | - **Làm việc với Amazon DynamoDB** <br>&emsp; + Thực hiện các thao tác CRUD cơ bản và cung cấp bảng <br>&emsp; + Tạo và truy vấn Global Secondary Index (GSI) <br>&emsp; + Quản trị bảng thông qua AWS CloudShell <br>&emsp; + Tự động hóa quản lý bảng và truy vấn sử dụng Python SDK <br> - **Làm việc với Amazon ElastiCache cho Redis** <br>&emsp; + Tạo nhóm subnet cho các lớp caching <br>&emsp; + Khởi chạy cụm Redis (Chế độ Cluster Enabled/Disabled) <br>&emsp; + Cấp quyền truy cập và kết nối qua các node client <br>&emsp; + Tích hợp AWS SDK cho các thao tác Redis <br>&emsp; + Triển khai các mẫu nâng cao: Strings, Hashes, Pub/Sub và Streams <br> - **Xây dựng Pipeline CI/CD cho Cụm EKS** <br>&emsp; + Thiết lập môi trường Cloud9 và các công cụ Kubernetes <br>&emsp; + Cấu hình IAM role cho xác thực EKS <br>&emsp; + Cung cấp cụm EKS và kiểm tra triển khai ứng dụng mẫu <br>&emsp; + Thiết lập CodePipeline và CodeBuild với các quyền IAM <br>&emsp; + Tự động hóa triển khai manifest từ kho mã nguồn <br>&emsp; + Xác minh việc thực thi pipeline thông qua các trigger code commit                                                                                                                                                                                                                                       | 11/04/2025   | 11/04/2025      | Amazon DynamoDB Workshop: <br> <https://000060.awsstudygroup.com/> <br> Amazon ElastiCache Workshop: <br> <https://000061.awsstudygroup.com/> <br> EKS CI/CD Workshop: <br> <https://000062.awsstudygroup.com/>      |
+| 4    | - **Quản lý Service Quotas** <br>&emsp; + Kiểm tra mức sử dụng hiện tại so với giới hạn <br>&emsp; + Yêu cầu tăng hạn mức thông qua console Service Quotas <br> - **Thực hiện Quản lý Chi phí và Sử dụng Tài nguyên với IAM** <br>&emsp; + Cấu trúc nhóm/người dùng IAM cho các ranh giới quyền hạn <br>&emsp; + Thực thi chính sách hạn chế tài nguyên theo Vùng (Region) AWS <br>&emsp; + Giới hạn các họ EC2 instance được phép sử dụng <br>&emsp; + Áp dụng hạn chế về kích thước EC2 instance <br>&emsp; + Kiểm soát chi phí bằng cách giới hạn các loại EBS volume khả dụng <br> - **Triển khai và Quản lý Cụm EKS sử dụng EKS Blueprints** <br>&emsp; + Khởi động hạ tầng: Thiết lập VPC và EC2 <br>&emsp; + Cấu hình IAM role cho thiết lập EKS Blueprints <br>&emsp; + Khởi tạo dự án EKS Blueprints và CDK <br>&emsp; + Xây dựng pipeline triển khai để quản lý cụm <br>&emsp; + Quản lý truy cập đa nhóm thông qua Cơ sở hạ tầng dưới dạng mã (IaC) <br>&emsp; + Tích hợp các add-on như Cluster Autoscaler <br>&emsp; + Triển khai khối lượng công việc sử dụng GitOps (ArgoCD)                                                                                                                                                                                                                                                                | 11/05/2025   | 11/05/2025      | Service Quotas Workshop: <br> <https://000063.awsstudygroup.com/> <br> Quản lý Tài nguyên IAM: <br> <https://000064.awsstudygroup.com/> <br> EKS Blueprints Workshop: <br> <https://000065.awsstudygroup.com/>       |
+| 5    | - **Xây dựng Ứng dụng Web Serverless sử dụng Lambda và API Gateway** <br>&emsp; + Thiết lập Cloud9 và CodeCommit để quản lý phiên bản <br>&emsp; + Host frontend thông qua AWS Amplify Console <br>&emsp; + Triển khai backend serverless (Lambda + API Gateway) <br>&emsp; + Khởi tạo dữ liệu trạng thái cho DynamoDB <br>&emsp; + Tích hợp logic đặt chuyến đi (ride-booking) <br>&emsp; + Phát triển quy trình xử lý ảnh sử dụng Lambda <br> - **Chuyển đổi Ứng dụng Monolithic sang Microservices sử dụng Docker và AWS Fargate** <br>&emsp; + Cung cấp môi trường thông qua CloudFormation <br>&emsp; + Container hóa ứng dụng cũ (legacy) với Docker <br>&emsp; + Triển khai container lên AWS Fargate serverless <br>&emsp; + Cấu hình Application Load Balancer và ECS Services <br>&emsp; + Quản lý các bản sửa đổi (revision) task definition và cập nhật <br>&emsp; + Tái cấu trúc và triển khai microservices song song với monolith <br> - **Đánh giá Hiệu năng Lưu trữ trên AWS** <br>&emsp; + Triển khai hạ tầng kiểm thử qua CloudFormation <br>&emsp; + Kiểm chuẩn thông lượng S3 và hiệu quả đồng bộ hóa <br>&emsp; + Phân tích hiệu năng cho các tệp nhỏ và thao tác sao chép <br>&emsp; + Tinh chỉnh EFS IOPS và đánh giá tác động của kích thước I/O <br>&emsp; + Đánh giá ảnh hưởng của đa luồng (multi-threading) lên hiệu năng EFS | 11/06/2025   | 11/06/2025      | Ứng dụng Web Serverless: <br> <https://000066.awsstudygroup.com/> <br> Microservices với Fargate: <br> <https://000067.awsstudygroup.com/> <br> Đánh giá Hiệu năng Lưu trữ: <br> <https://000068.awsstudygroup.com/> |
+| 6    | - **Triển khai Các phương pháp Bảo mật Tốt nhất cho S3** <br>&emsp; + Bảo mật truy cập mạng thông qua CloudFormation <br>&emsp; + Cấu hình khóa truy cập an toàn cho EC2 <br>&emsp; + Bắt buộc sử dụng giao thức HTTPS và mã hóa SSE-S3 <br>&emsp; + Bật "Block Public Access" và vô hiệu hóa ACLs <br>&emsp; + Hạn chế truy cập sử dụng S3 VPC Endpoints <br>&emsp; + Kiểm toán cấu hình với AWS Config <br>&emsp; + Xác minh quyền truy cập với Access Analyzer <br> - **Xây dựng Data Lake với Dữ liệu của Bạn** <br>&emsp; + Tập kết dữ liệu thô trong Cloud9 và S3 <br>&emsp; + Lập hồ sơ và làm sạch dữ liệu sử dụng AWS DataBrew <br>&emsp; + Lập danh mục và thu thập dữ liệu với AWS Glue <br>&emsp; + Chuyển đổi bộ dữ liệu sang định dạng Parquet <br>&emsp; + Thực thi các truy vấn phân tích thông qua Amazon Athena <br>&emsp; + Trực quan hóa thông tin chi tiết với dashboard Amazon QuickSight                                                                                                                                                                                                                                                                                                                                                                                                                                            | 11/07/2025   | 11/07/2025      | Các phương pháp Bảo mật Tốt nhất cho S3: <br> <https://000069.awsstudygroup.com/> <br> Data Lake Workshop: <br> <https://000070.awsstudygroup.com/>                                                                  |
 
+### Thành tựu Tuần 9:
 
-### Kết quả đạt được tuần 9:
+- Thiết kế các quy trình hội thoại và hệ thống nhắn tin bằng cách triển khai chatbot Amazon Lex với Lambda hooks và thiết lập kiến trúc SNS Pub/Sub tách biệt.
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+- Làm chủ các dịch vụ dữ liệu và bộ nhớ đệm được quản lý:
 
-* Đã tạo và cấu hình AWS Free Tier account thành công.
+  - Thực hiện các thao tác cốt lõi trên DynamoDB, bao gồm quản lý GSI và tự động hóa dựa trên SDK.
+  - Triển khai các cụm ElastiCache cho Redis, áp dụng các mẫu caching nâng cao như Pub/Sub và Streams.
 
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
+- Tự động hóa vòng đời Kubernetes bằng việc cung cấp các cụm EKS, định nghĩa IAM roles, và xây dựng các pipeline CI/CD với CodePipeline để hợp lý hóa việc triển khai ứng dụng.
 
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
+- Thực thi quản trị đám mây và tối ưu hóa chi phí:
 
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
+  - Kiểm toán và quản lý AWS Service Quotas cho khả năng mở rộng.
+  - Áp dụng các chính sách IAM chi tiết để hạn chế sử dụng tài nguyên theo Vùng, Loại Instance và đặc tính Volume.
 
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
+- Tận dụng EKS Blueprints và IaC để khởi động hạ tầng mạng, quản lý truy cập đa nhóm, và triển khai các add-on (Autoscaler) cùng khối lượng công việc thông qua ArgoCD.
 
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
+- Kiến trúc các giải pháp ứng dụng hiện đại:
 
+  - Xây dựng ứng dụng đặt xe serverless full-stack sử dụng Amplify, API Gateway và Lambda.
+  - Tái cấu trúc ứng dụng monolithic thành microservices, đóng gói bằng Docker và triển khai trên AWS Fargate.
 
+- Kiểm chuẩn hiệu năng lưu trữ bằng cách phân tích thông lượng S3 và tốc độ truyền tải, song song với việc tinh chỉnh cấu hình IOPS và luồng của EFS.
+
+- Củng cố tư thế bảo mật S3:
+
+  - Bắt buộc mã hóa và HTTPS, chặn truy cập công khai qua ACLs, và hạn chế lưu lượng qua VPC Endpoints.
+  - Sử dụng AWS Config và Access Analyzer để kiểm toán và khắc phục các rủi ro bảo mật tiềm ẩn.
+
+- Thiết lập nền tảng Data Lake: tập kết dữ liệu vào S3, chuyển đổi thông qua Glue/DataBrew, và kích hoạt phân tích với truy vấn Athena cùng trực quan hóa QuickSight.

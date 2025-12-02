@@ -1,57 +1,57 @@
 ---
 title: "Week 9 Worklog"
-date: "2025-09-09T19:53:52+07:00"
-weight: 1
+date: "2025-12-02"
+weight: 9
 chapter: false
 pre: " <b> 1.9. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
 
 ### Week 9 Objectives:
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+- Architect conversational interfaces and event-driven systems utilizing Amazon Lex and Amazon SNS.
+- Implement managed data and caching solutions with DynamoDB and ElastiCache, while automating EKS deployments.
+- Enforce governance and scalability via Service Quotas, IAM-based usage controls, and EKS Blueprints.
+- Develop and maintain serverless and containerized workloads, and assess storage performance across S3 and EFS.
+- Secure S3 infrastructure and establish a fundamental data lake pipeline using Glue, Athena, and QuickSight.
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+### Tasks carried out this week:
 
+| Day | Task                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Start Date | Completion Date | Reference Material                                                                                                                                                                                                           |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2   | - **Configure an Amazon Lex Chatbot** <br>&emsp; + Provision backend infrastructure and APIs <br>&emsp; + Initialize and configure a new Lex chatbot instance <br>&emsp; + Refine conversational intents and slot types <br>&emsp; + Implement Lambda hooks for fulfillment logic <br>&emsp; + Publish chatbot aliases for production use <br> - **Implement a Publish/Subscribe Messaging Model with Amazon SNS** <br>&emsp; + Deploy base infrastructure via SAM template <br>&emsp; + Configure SNS Topics for event broadcasting <br>&emsp; + Build decoupled subscribers: Notification, Accounting, and Ride services <br>&emsp; + Apply message filtering policies for specific routing <br>&emsp; + Update publisher services and validate fan-out delivery                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | 11/03/2025 | 11/03/2025      | Amazon Lex Chatbot: <br> <https://000058.awsstudygroup.com/> <br> Messaging with Amazon SNS: <br> <https://000059.awsstudygroup.com/>                                                                                        |
+| 3   | - **Work with Amazon DynamoDB** <br>&emsp; + Execute core CRUD operations and table provisioning <br>&emsp; + Implement and query Global Secondary Indexes (GSI) <br>&emsp; + Administer tables via AWS CloudShell <br>&emsp; + Automate table management and queries using the Python SDK <br> - **Work with Amazon ElastiCache for Redis** <br>&emsp; + Configure subnet groups for caching layers <br>&emsp; + Launch Redis clusters (Cluster Mode Enabled/Disabled) <br>&emsp; + Secure access and connect via client nodes <br>&emsp; + Integrate AWS SDK for Redis operations <br>&emsp; + Implement advanced patterns: Strings, Hashes, Pub/Sub, and Streams <br> - **Build a CI/CD Pipeline for an EKS Cluster** <br>&emsp; + Set up Cloud9 environment and Kubernetes tools <br>&emsp; + Configure IAM roles for EKS authentication <br>&emsp; + Provision EKS cluster and validate sample app deployment <br>&emsp; + Setup CodePipeline and CodeBuild with IAM permissions <br>&emsp; + Automate manifest deployment from source repositories <br>&emsp; + Verify pipeline execution via code commit triggers                                                                                                                          | 11/04/2025 | 11/04/2025      | Amazon DynamoDB Workshop: <br> <https://000060.awsstudygroup.com/> <br> Amazon ElastiCache Workshop: <br> <https://000061.awsstudygroup.com/> <br> EKS CI/CD Workshop: <br> <https://000062.awsstudygroup.com/>              |
+| 4   | - **Manage Service Quotas** <br>&emsp; + Audit current utilization against limits <br>&emsp; + Request quota increases via the Service Quotas console <br> - **Implement Resource Usage and Cost Management with IAM** <br>&emsp; + Structure IAM groups/users for permission boundaries <br>&emsp; + Enforce policies restricting resources by AWS Region <br>&emsp; + Limit allowed EC2 instance families <br>&emsp; + Apply restrictions on EC2 instance sizes <br>&emsp; + Control costs by limiting available EBS volume types <br> - **Deploy and Manage an EKS Cluster using EKS Blueprints** <br>&emsp; + Bootstrap infrastructure: VPC and EC2 setup <br>&emsp; + Configure IAM roles for EKS Blueprints <br>&emsp; + Initialize EKS Blueprints and CDK projects <br>&emsp; + Construct deployment pipelines for cluster management <br>&emsp; + Manage multi-team access via Infrastructure as Code (IaC) <br>&emsp; + Integrate add-ons like Cluster Autoscaler <br>&emsp; + Deploy workloads using GitOps (ArgoCD)                                                                                                                                                                                                                    | 11/05/2025 | 11/05/2025      | Service Quotas Workshop: <br> <https://000063.awsstudygroup.com/> <br> IAM Resource Management: <br> <https://000064.awsstudygroup.com/> <br> EKS Blueprints Workshop: <br> <https://000065.awsstudygroup.com/>              |
+| 5   | - **Build a Serverless Web Application using Lambda and API Gateway** <br>&emsp; + Setup Cloud9 and CodeCommit for version control <br>&emsp; + Host frontend via AWS Amplify Console <br>&emsp; + Deploy serverless backend (Lambda + API Gateway) <br>&emsp; + Seed DynamoDB state data <br>&emsp; + Implement ride-booking logic integration <br>&emsp; + Develop photo processing pipelines using Lambda <br> - **Transition a Monolithic Application to Microservices using Docker and AWS Fargate** <br>&emsp; + Provision environment via CloudFormation <br>&emsp; + Containerize legacy application with Docker <br>&emsp; + Deploy containers to serverless AWS Fargate <br>&emsp; + Configure Application Load Balancer and ECS Services <br>&emsp; + Manage task definition revisions and updates <br>&emsp; + Refactor and deploy microservices alongside the monolith <br> - **Evaluate Storage Performance on AWS** <br>&emsp; + Deploy test infrastructure via CloudFormation <br>&emsp; + Benchmark S3 throughput and sync efficiency <br>&emsp; + Analyze performance for small-file and copy operations <br>&emsp; + Tune EFS IOPS and evaluate I/O size impact <br>&emsp; + Assess multi-threading effects on EFS performance | 11/06/2025 | 11/06/2025      | Serverless Web Application: <br> <https://000066.awsstudygroup.com/> <br> Microservices with Fargate: <br> <https://000067.awsstudygroup.com/> <br> Storage Performance Evaluation: <br> <https://000068.awsstudygroup.com/> |
+| 6   | - **Implement S3 Security Best Practices** <br>&emsp; + Secure network access via CloudFormation <br>&emsp; + Configure secure access keys for EC2 <br>&emsp; + Enforce HTTPS transport and SSE-S3 encryption <br>&emsp; + Enable "Block Public Access" and disable ACLs <br>&emsp; + Restrict access using S3 VPC Endpoints <br>&emsp; + Audit configurations with AWS Config <br>&emsp; + Verify permissions with Access Analyzer <br> - **Build a Data Lake with Your Data** <br>&emsp; + Stage raw datasets in Cloud9 and S3 <br>&emsp; + Profile and clean data using AWS DataBrew <br>&emsp; + Catalog and ingest data with AWS Glue <br>&emsp; + Transform datasets to Parquet format <br>&emsp; + Execute analytical queries via Amazon Athena <br>&emsp; + Visualize insights with Amazon QuickSight dashboards                                                                                                                                                                                                                                                                                                                                                                                                                          | 11/07/2025 | 11/07/2025      | S3 Security Best Practices: <br> <https://000069.awsstudygroup.com/> <br> Data Lake Workshop: <br> <https://000070.awsstudygroup.com/>                                                                                       |
 
 ### Week 9 Achievements:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
+- Engineered conversational workflows and messaging systems by deploying Amazon Lex chatbots with Lambda hooks and establishing a decoupled SNS Pub/Sub architecture.
 
-* Successfully created and configured an AWS Free Tier account.
+- Mastered managed data and caching services:
 
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
+  - Executed core DynamoDB operations, including GSI management and SDK-based automation.
+  - Deployed ElastiCache for Redis clusters, implementing advanced caching patterns like Pub/Sub and Streams.
 
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
+- Automated Kubernetes lifecycles by provisioning EKS clusters, defining IAM roles, and constructing CI/CD pipelines with CodePipeline to streamline application deployment.
 
-* Used AWS CLI to perform basic operations such as:
+- Enforced cloud governance and cost optimization:
 
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
+  - Audited and managed AWS Service Quotas for scalability.
+  - Applied granular IAM policies to restrict resource usage by Region, Instance Type, and Volume characteristics.
 
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+- Leveraged EKS Blueprints and IaC to bootstrap network infrastructure, manage multi-team access, and deploy add-ons (Autoscaler) and workloads via ArgoCD.
+
+- Architected modern application solutions:
+
+  - Built a full-stack serverless ride-share app using Amplify, API Gateway, and Lambda.
+  - Refactored a monolithic application into microservices, containerized via Docker, and deployed on AWS Fargate.
+
+- Benchmarked storage performance by analyzing S3 throughput and transfer speeds, alongside tuning EFS IOPS and threading configurations.
+
+- Hardened S3 security posture:
+
+  - Enforced encryption and HTTPS, blocked public access via ACLs, and restricted traffic through VPC Endpoints.
+  - Utilized AWS Config and Access Analyzer to audit and remediate potential security risks.
+
+- Established a foundational Data Lake: staged data in S3, transformed it via Glue/DataBrew, and enabled analytics with Athena querying and QuickSight visualizations.

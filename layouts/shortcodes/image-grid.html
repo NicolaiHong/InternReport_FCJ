@@ -1,1 +1,7 @@
-<div class="image-grid">{{ .Inner | safeHTML }}</div>
+{{/* image-grid shortcode - rewrites image src attributes that start with a
+leading slash (/images/...) to include the site's BaseURL - this ensures images
+work when the site is deployed under a subpath (e.g., GitHub Pages project site)
+*/}} {{ $base := .Site.BaseURL }} {{ $in := .Inner | safeHTML }} {{/* replace
+src="/ with src="<base /> to keep other absolute URLs untouched */}} {{ $fixed
+:= replace $in `src="/` (print `src="` $base) }}
+<div class="image-grid">{{ $fixed | safeHTML }}</div>

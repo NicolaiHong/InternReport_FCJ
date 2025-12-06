@@ -1,9 +1,9 @@
 ---
-title: "Prerequisites"
-date: "2025-09-15"
-weight: 1
-chapter: false
-pre: " <b> 5.1.1 </b> "
+title : "Prerequisites"
+date :  "2025-09-15" 
+weight : 1 
+chapter : false
+pre : " <b> 5.1.1 </b> "
 ---
 
 ### Required AWS Knowledge
@@ -24,42 +24,38 @@ pre: " <b> 5.1.1 </b> "
 Before starting this workshop, ensure you have:
 
 1. **AWS Account**
-
-   - Active AWS account with administrative access
-   - Credit card on file (required even for Free Tier)
-   - MFA (Multi-Factor Authentication) enabled on root account (strongly recommended)
+    - Active AWS account with administrative access
+    - Credit card on file (required even for Free Tier)
+    - MFA (Multi-Factor Authentication) enabled on root account (strongly recommended)
 
 2. **IAM User** (Recommended)
-
-   - IAM user with appropriate permissions instead of using root account
-   - Required permissions:
-     - `AmazonS3FullAccess`
-     - `CloudFrontFullAccess`
-     - `WAFv2FullAccess`
-     - `AWSCertificateManagerFullAccess` (if using custom domain)
-   - Access key and secret key generated (for CLI access)
+    - IAM user with appropriate permissions instead of using root account
+    - Required permissions:
+        - `AmazonS3FullAccess`
+        - `CloudFrontFullAccess`
+        - `WAFv2FullAccess`
+        - `AWSCertificateManagerFullAccess` (if using custom domain)
+    - Access key and secret key generated (for CLI access)
 
 3. **Billing Alerts**
-   - Set up AWS Budgets or billing alerts to monitor costs
-   - Recommended: Set alert at $10 threshold
+    - Set up AWS Budgets or billing alerts to monitor costs
+    - Recommended: Set alert at $10 threshold
 
 ### Required Tools and Software
 
 Install the following tools on your local machine:
 
 1. **Text Editor or IDE**
-
-   - VS Code (recommended): https://code.visualstudio.com/
-   - Or any editor of your choice (Sublime Text, Atom, etc.)
+    - VS Code (recommended): https://code.visualstudio.com/
+    - Or any editor of your choice (Sublime Text, Atom, etc.)
 
 2. **Web Browser**
-
-   - Modern browser (Chrome, Firefox, Safari, or Edge)
-   - Multiple tabs recommended for console navigation
+    - Modern browser (Chrome, Firefox, Safari, or Edge)
+    - Multiple tabs recommended for console navigation
 
 3. **Git** (Optional but recommended)
-   - Download: https://git-scm.com/
-   - Used for version control and sample code retrieval
+    - Download: https://git-scm.com/
+    - Used for version control and sample code retrieval
 
 ### Sample Application
 
@@ -76,20 +72,17 @@ If you want to use a custom domain (e.g., `www.yoursite.com`):
 ### Cost Expectations for Part 1: Frontend Deployment
 
 **Free Tier Eligible Services:**
-
 - **S3**: 5GB storage, 20,000 GET requests, 2,000 PUT requests (first 12 months)
 - **CloudFront**: 1TB data transfer out, 10,000,000 HTTP/HTTPS requests (first 12 months)
 - **AWS WAF**: No Free Tier, but minimal cost for basic rules
 
 **Estimated Costs** (if exceeding Free Tier):
-
 - S3 storage: $0.023 per GB per month
 - CloudFront data transfer: $0.085 per GB (varies by region)
 - WAF: $5.00 per month per web ACL + $1.00 per rule per month
 - **Total estimated cost for this workshop**: $0-$2 (within Free Tier) or $5-$10 (with WAF)
 
 **Cost Saving Tips:**
-
 - Delete resources immediately after workshop if not continuing
 - Use small sample files to minimize storage and transfer costs
 - Start with basic WAF rules and expand later

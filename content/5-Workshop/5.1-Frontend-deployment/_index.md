@@ -1,190 +1,71 @@
 ---
-title: "Part 4: Clean up"
-date: "2025-09-15"
-weight: 5
-chapter: false
-pre: " <b> 5.1.5 </b> "
+title : "Part 1: Frontend Deployment with CloudFront, WAF, and S3"
+date :  "2025-09-15" 
+weight : 1 
+chapter : false
+pre : " <b> 5.1. </b> "
 ---
 
-## Overview
+## Introduction
 
-This section covers how to properly clean up the resources you created during frontend deployment. Cleaning up is important to avoid ongoing AWS charges, especially for resources that have monthly costs like WAF Web ACLs.
+Welcome to the first workshop in our serverless application series! In this hands-on session, you'll learn how to deploy a secure, high-performance static website using AWS's content delivery and storage services.
 
-**What you'll learn:**
+Modern web applications require fast, reliable, and secure content delivery to users worldwide. In this workshop, you'll build the frontend infrastructure that forms the foundation of a production-ready serverless application. You'll configure Amazon S3 to host your static website files, set up Amazon CloudFront to distribute your content globally with low latency, and implement AWS WAF (Web Application Firewall) to protect your application from common web exploits.
 
-- How to safely delete resources in the correct order
-- Understanding resource dependencies
-- Cost implications of keeping vs. deleting resources
-- How to preserve configuration for future use
-- Partial cleanup options
+![Diagram]( /images/5-Workshop/5.1-Frontend-deployment/5.1/diagram.png)
 
-**Estimated time**: 15-20 minutes
+### What You'll Build
 
-## Should You Clean Up?
+By the end of this workshop, you'll have deployed a complete frontend infrastructure featuring:
 
-### Keep Resources If:
+- **Static Website Hosting**: An S3 bucket configured to serve your HTML, CSS, and JavaScript files
+- **Global Content Delivery**: A CloudFront distribution that caches and delivers your content from edge locations worldwide
+- **Security Layer**: AWS WAF rules protecting your application from common threats like SQL injection, cross-site scripting (XSS), and DDoS attacks
+- **HTTPS Security**: SSL/TLS certificate configuration for secure communication
+- **Custom Domain** (Optional): Your website accessible via a custom domain name
 
-- ✅ You're proceeding immediately to Part 2: Serverless Backend
-- ✅ You want to maintain the working frontend for reference
-- ✅ You're using this for a real project
-- ✅ Costs are acceptable for your use case
+### Why This Architecture?
 
-### Clean Up If:
+This architecture offers several key benefits:
 
-- ✅ You've completed the workshop and don't need the resources
-- ✅ You want to minimize AWS costs
-- ✅ You're practicing and will recreate later
-- ✅ You're approaching Free Tier limits
+- **Performance**: CloudFront edge locations ensure fast load times for users regardless of their geographic location
+- **Scalability**: Automatically handles traffic spikes without manual intervention
+- **Cost-Effective**: Pay only for what you use, with no servers to manage
+- **Security**: Multiple layers of protection including WAF, DDoS protection, and encryption
+- **Reliability**: Built on AWS's highly available infrastructure with 99.9% uptime SLA
 
-## Complete Cleanup (Step-by-Step)
+## Workshop Structure
 
-Follow this order to avoid dependency errors:
+This workshop is divided into the following sections:
 
-### Step 1: Disable and Delete CloudFront Distribution
+1. **Part 1: S3 Static Website Hosting**
+    - Create and configure S3 bucket
+    - Upload website files
+    - Configure bucket for static website hosting
+    - Test basic website access
 
-CloudFront distributions must be disabled before deletion.
+2. **Part 2: CloudFront Distribution Setup**
+    - Create CloudFront distribution
+    - Configure origin settings
+    - Set up cache behaviors
+    - Test global content delivery
 
-#### 1.1 Disable Distribution
+3. **Part 3: AWS WAF Configuration**
+    - Create Web ACL
+    - Configure security rules
+    - Associate WAF with CloudFront
+    - Test security rules
 
-1. Go to CloudFront console
-2. Select your distribution (check the box)
-3. Click **Disable**
-4. Confirm by clicking **Disable** in the modal
+4. **Part 4: Cleanup** (Optional)
+    - Remove resources to avoid charges
+    - Save configuration for future use
 
-**Status changes:**
+### Workshop Duration
 
-- **Deploying**: Distribution is being disabled
-- **Deployed**: Disabled successfully
+**Estimated Time**: 2-3 hours
 
-**Wait time**: 5-15 minutes
-
-#### 1.2 Wait for "Deployed" Status
-
-1. Stay on the CloudFront distributions page
-2. Refresh periodically (every 2-3 minutes)
-3. Wait until **Status** column shows **Deployed**
-4. **Last modified** field shows a date
-
-![CloudFront Disabled](/images/5-Workshop/5.1-Frontend-deployment/5.1.5-Cleanup/2.png)
-
-#### 2.3 Delete Distribution
-
-1. Select your disabled distribution (check the box)
-2. Click **Delete**
-3. Confirm by clicking **Delete** in the modal
-
-**Expected result**: Distribution is removed from list
-
-**Note**: If you upgraded your distribution to Pro, you must wait until the next billing cycle to delete it.
-
-### Step 3: Delete SSL/TLS Certificate (Optional)
-
-Only if you created a custom SSL certificate in ACM for custom domains.
-
-#### 3.1 Check Certificate Usage
-
-Before deleting, verify the certificate isn't used elsewhere:
-
-1. Go to Certificate Manager console
-2. Ensure you're in **us-east-1** region
-3. Find your certificate
-4. Check the **In use?** column
-
-**If "Yes"**: Don't delete (still associated with resources)
-**If "No"**: Safe to delete
-
-#### 3.2 Delete Certificate
-
-1. Select your certificate (check the box)
-2. Click **Delete**
-3. Confirm by clicking **Delete** in the modal
-
-![ACM Delete](/images/5-Workshop/5.1-Frontend-deployment/5.1.5-Cleanup/3.png)
-
-**Expected result**: Certificate is removed from list
-
-{{% notice note %}}
-**Free Service:**
-ACM certificates are free, so deleting them doesn't save costs. You might want to keep the certificate if:<br>
-You'll recreate the distribution later<br>
-You use the same domain for other AWS services<br>
-Validation took a long time (you'd have to repeat it)<br>
-{{% /notice %}}
-
-### Step 4: Delete S3 Bucket
-
-S3 buckets must be empty before deletion.
-
-#### 4.1 Empty the Bucket
-
-1. Go to S3 console
-2. Click on your bucket name: `workshop-frontend-[your-name]-[random]`
-3. If there are files, click **Empty**
-4. Type `permanently delete` to confirm
-5. Click **Empty**
-
-![S3 Empty Bucket](/images/5-Workshop/5.1-Frontend-deployment/5.1.5-Cleanup/4.png)
-
-#### 4.2 Delete the Bucket
-
-1. Go back to the S3 buckets list
-2. Select your bucket (check the box)
-3. Click **Delete**
-4. Type your bucket name to confirm
-5. Click **Delete bucket**
-
-### Step 5: Delete CloudWatch Alarms
-
-Only if you created CloudWatch alarms in the optional section.
-
-1. Go to CloudWatch console
-2. Click **Alarms** in left navigation
-3. Select alarm(s): `WAF-High-Blocked-Requests`
-4. Click **Actions** → **Delete**
-5. Confirm deletion
-
-![CloudWatch Delete Alarm](/images/5-Workshop/5.1-Frontend-deployment/5.1.5-Cleanup/5.png)
-
-### Step 6: Delete CloudWatch log group
-
-6. Click **Logs** -> **Log groups**
-7. Select log groups you created in [Part 3]({{< relref "/5-Workshop/5.1-Frontend-deployment/5.1.4-WAF" >}}#91-enable-logging-destination-in-waf)
-   `aws-waf-logs-workshop1` and select delete
-
-### Step 7: Delete SNS Topics
-
-1. Go to SNS console
-2. Click **Topics** in left navigation
-3. Select topic: `Default_CloudWatch_Alarms_Topic`
-4. Click **Delete**
-5. Type `delete me` to confirm
-6. Click **Delete**
-
-## Summary
-
-### Cleanup Completion Checklist
-
-**If performing complete cleanup:**
-
-- [ ] CloudFront distribution disabled and deleted
-- [ ] SSL certificate deleted (if created)
-- [ ] S3 bucket(s) emptied and deleted
-- [ ] CloudWatch alarms deleted
-- [ ] SNS topics deleted
-- [ ] Verified no remaining charges in Billing Dashboard
-
-### What's Next?
-
-If continuing to Part 2: Serverless backend:
-
-- Keep existing resources OR
-- Proceed with backend deployment
-- Backend will integrate with this frontend infrastructure
-
-If finished with workshop:
-
-- All resources cleaned up
-- No ongoing charges
-- Knowledge and skills gained! 🎉
-
-**Congratulations!** You've successfully completed Part 1: Frontend Deployment, including proper resource cleanup. You now understand how to deploy, secure, and manage a serverless frontend on AWS! 🎉
+- Setup and preparation: 15 minutes
+- S3 configuration: 30 minutes
+- CloudFront setup: 45 minutes
+- WAF implementation: 45 minutes
+- Testing and validation: 30 minutes

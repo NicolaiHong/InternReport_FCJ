@@ -1,9 +1,9 @@
 ---
-title: "S3 Static Website Hosting"
-date: "2025-09-15"
-weight: 2
-chapter: false
-pre: " <b> 5.1.2 </b> "
+title : "S3 Static Website Hosting"
+date :  "2025-09-15" 
+weight : 2 
+chapter : false
+pre : " <b> 5.1.2 </b> "
 ---
 
 ## Overview
@@ -11,7 +11,6 @@ pre: " <b> 5.1.2 </b> "
 In this section, you'll set up Amazon S3 to host your static website. S3 (Simple Storage Service) provides a cost-effective and highly durable solution for hosting static content like HTML, CSS, JavaScript, and images.
 
 **What you'll accomplish:**
-
 - Clone the sample application repository
 - Build the frontend application
 - Create and configure an S3 bucket
@@ -22,22 +21,18 @@ In this section, you'll set up Amazon S3 to host your static website. S3 (Simple
 **Estimated time**: 30 minutes
 
 ## Costs Considerations
-
 ### Free-tier:
-
 - S3 does not have free-tier benefits
 
 ### Paid-tier
-
 1. Even paid tier cost is minimal for our workshop
-2. Overall: <$0 (clean up immediately after finish workshop)
+4. Overall: <$0 (clean up immediately after finish workshop)
 
 ## Step 1: Prepare Your Application
 
 ### 1.1 Clone the Sample Repository
 
 Open your terminal or command prompt and run:
-
 ```bash
 git clone https://github.com/Icyretsz/fcj-workshop-serverless-frontend.git
 ```
@@ -45,13 +40,11 @@ git clone https://github.com/Icyretsz/fcj-workshop-serverless-frontend.git
 ### 1.2 Install Dependencies
 
 The sample application uses Node.js and npm. Install the required dependencies:
-
 ```bash
 npm install
 ```
 
 **Troubleshooting:**
-
 - If you don't have Node.js installed, download it from https://nodejs.org/ (LTS version recommended)
 - Verify installation: `node --version` and `npm --version`
 - Minimum required versions: Node.js 16.x or higher
@@ -59,13 +52,11 @@ npm install
 ### 1.3 Build the Application
 
 Navigate to the root directory and build the production-ready version:
-
 ```bash
 npm run build
 ```
 
 **The command will:**
-
 - The build process compiled your source code
 - Optimized assets for production (minification, bundling)
 - Created a `dist/` directory with all deployable files
@@ -73,13 +64,11 @@ npm run build
 ### 1.4 Verify Build Output
 
 Check the contents of your build directory:
-
 ```bash
 ls -la dist/
 ```
 
 **You should see:**
-
 ```
 dist/
 ├── index.html
@@ -101,7 +90,7 @@ dist/
 2. In the search bar at the top, type "S3"
 3. Click on **S3** under Services
 
-![S3 Console Navigation](/images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/1.png)
+![S3 Console Navigation]( /images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/1.png)
 
 ### 2.2 Create New Bucket
 
@@ -109,23 +98,20 @@ dist/
 2. Configure the following settings:
 
 **General Configuration:**
-
 - **Bucket name**: `workshop-frontend-[your-name]-[random-string]`
-  - Example: `workshop-frontend-john-a1b2c3`
-  - Must be globally unique across all AWS accounts
-  - Use only lowercase letters, numbers, and hyphens
-  - **Note**: Write down your bucket name - you'll need it throughout the workshop
+    - Example: `workshop-frontend-john-a1b2c3`
+    - Must be globally unique across all AWS accounts
+    - Use only lowercase letters, numbers, and hyphens
+    - **Note**: Write down your bucket name - you'll need it throughout the workshop
 
-![S3 Bucket Creation](/images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/2.png)
+![S3 Bucket Creation]( /images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/2.png)
 
 ### 2.3 Configure Bucket Settings
 
 **Object Ownership:**
-
 - Keep default: **ACLs disabled (recommended)**
 
 **Block Public Access settings:**
-
 - **UNCHECK** "Block all public access"
 - Check the acknowledgment box: "I acknowledge that the current settings might result in this bucket and the objects within becoming public"
 
@@ -133,23 +119,19 @@ dist/
 **⚠️ Security Note**: We're making this bucket public for website hosting. In production, you'd use CloudFront to access the bucket privately, which we'll configure in Part 2.
 {{% /notice %}}
 
-![S3 Public Access Settings](/images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/3.png)
+![S3 Public Access Settings]( /images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/3.png)
 
 **Bucket Versioning:**
-
 - Keep default: **Disable**
 
 **Tags** (Optional but recommended):
-
 - Key: `Project`, Value: `ServerlessWorkshop`
 - Key: `Workshop`, Value: `Frontend`
 
 **Default encryption:**
-
 - Keep default: **Server-side encryption with Amazon S3 managed keys (SSE-S3)**
 
 **Advanced settings:**
-
 - Keep all defaults
 
 ### 2.4 Create the Bucket
@@ -166,39 +148,34 @@ dist/
 3. Scroll down to **Static website hosting** section
 4. Click **Edit**
 
-![S3 Properties Tab](/images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/4.png)
+![S3 Properties Tab]( /images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/4.png)
 
 ### 3.2 Configure Hosting Settings
 
 **Static website hosting:**
-
 - Select **Enable**
 
 **Hosting type:**
-
 - Select **Host a static website**
 
 **Index document:**
-
 - Enter: `index.html`
 
 **Error document** (Optional):
-
 - Enter: `index.html`
-  - This allows client-side routing to work properly (for React, Vue, Angular apps)
+    - This allows client-side routing to work properly (for React, Vue, Angular apps)
 
-![S3 Website Hosting Config](/images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/5.png)
+![S3 Website Hosting Config]( /images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/5.png)
 
 - Click **Save changes**
 
 ### 3.3 View website endpoint
-
 1. Scroll back down to **Static website hosting** section
 2. **Copy the Bucket website endpoint URL**
-   - Example: `http://workshop-frontend-john-a1b2c3.s3-website-us-east-1.amazonaws.com`
-   - **Save this URL** - you'll use it to test the website
+    - Example: `http://workshop-frontend-john-a1b2c3.s3-website-us-east-1.amazonaws.com`
+    - **Save this URL** - you'll use it to test the website
 
-![S3 Website Endpoint](/images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/6.png)
+![S3 Website Endpoint]( /images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/6.png)
 
 ## Step 4: Upload Website Files
 
@@ -207,19 +184,17 @@ dist/
 1. Navigate to the **Objects** tab in your bucket
 2. Click **Upload**
 
-![S3 Upload Button](/images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/7.png)
+![S3 Upload Button]( /images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/7.png)
 
 ### 4.2 Add Files
 
 **Option A: Drag and Drop**
-
 1. Open your file explorer/finder
 2. Navigate to your `frontend/dist/` directory
 3. Select ALL files and folders inside the build directory
 4. Drag them into the upload area
 
 **Option B: Browse Files**
-
 1. Click **Add files** and **Add folder**
 2. Navigate to `frontend/dist/`
 3. Select all contents
@@ -228,20 +203,17 @@ dist/
 **⚠️ Important**: Upload the **contents** of the dist folder, not the dist folder itself. Your S3 bucket root should have `index.html` at the top level.
 {{% /notice %}}
 
-![S3 Upload Files](/images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/8.png)
+![S3 Upload Files]( /images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/8.png)
 
 ### 4.3 Configure Upload Settings
 
 **Permissions:**
-
 - Keep defaults (inherited from bucket)
 
 **Properties:**
-
 - Keep defaults
 
 **Storage class:**
-
 - Keep default: **Standard**
 
 ### 4.4 Complete Upload
@@ -251,12 +223,11 @@ dist/
 3. You should see "Upload succeeded" with a list of uploaded files
 4. Click **Close**
 
-![S3 Upload Success](/images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/9.png)
+![S3 Upload Success]( /images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/9.png)
 
 ### 4.5 Verify Upload
 
 Back in your bucket, you should now see:
-
 - `index.html`
 - `favicon.ico`
 - `static/` folder
@@ -270,50 +241,47 @@ Back in your bucket, you should now see:
 2. Scroll down to **Bucket policy** section
 3. Click **Edit**
 
-![S3 Permissions Tab](/images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/10.png)
+![S3 Permissions Tab]( /images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/10.png)
 
 ### 5.2 Add Policy JSON
 
 Copy and paste the following policy, **replacing `YOUR-BUCKET-NAME`** with your actual bucket name:
-
 ```json
 {
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "PublicReadGetObject",
-      "Effect": "Allow",
-      "Principal": "*",
-      "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::YOUR-BUCKET-NAME/*"
-    }
-  ]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::YOUR-BUCKET-NAME/*"
+        }
+    ]
 }
 ```
 
 **Example with actual bucket name:**
-
 ```json
 {
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "PublicReadGetObject",
-      "Effect": "Allow",
-      "Principal": "*",
-      "Action": "s3:GetObject",
-      "Resource": "arn:aws:s3:::workshop-frontend-thien-bucket/*"
-    }
-  ]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::workshop-frontend-thien-bucket/*"
+        }
+    ]
 }
 ```
 
 **What this policy does:**
-
 - Allows anyone (`"Principal": "*"`) to read (`s3:GetObject`) any object in your bucket
 - Required for public website hosting
 
-![S3 Bucket Policy](/images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/11.png)
+![S3 Bucket Policy]( /images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/11.png)
 
 ### 5.3 Save Policy
 
@@ -328,11 +296,10 @@ Copy and paste the following policy, **replacing `YOUR-BUCKET-NAME`** with your 
 3. Example: `http://workshop-frontend-john-a1b2c3.s3-website-us-east-1.amazonaws.com`
 
 **Expected result:**
-
 - The website should load successfully
 - You should see the homepage of the application
 
-![Website Success](/images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/12.png)
+![Website Success]( /images/5-Workshop/5.1-Frontend-deployment/5.1.2-S3-Hosting/12.png)
 
 ### 6.2 Test Navigation
 
@@ -343,7 +310,6 @@ Copy and paste the following policy, **replacing `YOUR-BUCKET-NAME`** with your 
 ### 6.3 Test Direct Object Access
 
 You can also access individual files directly:
-
 - `http://your-bucket-endpoint/index.html`
 - `http://your-bucket-endpoint /css/main.def456.css`
 
@@ -354,7 +320,6 @@ You can also access individual files directly:
 **Cause**: Bucket policy not configured correctly or bucket not public
 
 **Solution:**
-
 1. Verify bucket policy is correct and saved
 2. Check that "Block all public access" is disabled
 3. Ensure the Resource ARN in the policy matches your bucket name
@@ -365,7 +330,6 @@ You can also access individual files directly:
 **Cause**: File not uploaded or incorrect URL
 
 **Solution:**
-
 1. Verify files are in the bucket root (not in a subfolder)
 2. Check that `index.html` exists at the bucket root
 3. Verify the website endpoint URL is correct
@@ -376,7 +340,6 @@ You can also access individual files directly:
 **Cause**: Incorrect content types or file paths
 
 **Solution:**
-
 1. Check browser console for 404 errors
 2. Verify file paths in your HTML match the uploaded structure
 3. If using CLI, ensure content types are set correctly
@@ -387,7 +350,6 @@ You can also access individual files directly:
 **Cause**: S3 bucket names are globally unique
 
 **Solution:**
-
 1. Choose a different bucket name
 2. Add more random characters or your AWS account ID
 3. Example: `workshop-frontend-john-20241126-a1b2c3`
@@ -395,18 +357,16 @@ You can also access individual files directly:
 ## Summary
 
 Congratulations! You've successfully:
-
-- Cloned and built the sample application
-- Created an S3 bucket
-- Configured static website hosting
-- Uploaded your website files
-- Set up public access with bucket policy
-- Tested the live website
+-   Cloned and built the sample application
+-   Created an S3 bucket
+-   Configured static website hosting
+-   Uploaded your website files
+-   Set up public access with bucket policy
+-   Tested the live website
 
 ### What You've Deployed
 
 The website is now:
-
 - Hosted on AWS S3
 - Publicly accessible via the S3 website endpoint
 - Serving static files (HTML, CSS, JavaScript)
@@ -415,11 +375,10 @@ The website is now:
 ### Current Limitations
 
 Right now, the website:
-
-- Only uses HTTP (not HTTPS)
-- Has no CDN/caching for global users
-- Has no DDoS protection or WAF
-- Uses a non-memorable S3 endpoint URL
+-   Only uses HTTP (not HTTPS)
+-   Has no CDN/caching for global users
+-   Has no DDoS protection or WAF
+-   Uses a non-memorable S3 endpoint URL
 
 **In the next sections**, we'll address these by adding CloudFront and WAF.
 
@@ -430,13 +389,11 @@ Proceed to **Part 2: CloudFront Distribution Setup** to add global content deliv
 ### Quick Reference
 
 **Your Resources:**
-
 - Bucket Name: `_______________________________`
 - Website Endpoint: `_______________________________`
 - Region: `_______________________________`
 
 **Useful Commands (AWS CLI):**
-
 ```bash
 # Update website content
 cd frontend

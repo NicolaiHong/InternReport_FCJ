@@ -1,126 +1,51 @@
 ---
 title: "Blog 1"
-date: "2025-09-09T19:53:52+07:00"
+date: "2025-10-10"
 weight: 1
 chapter: false
 pre: " <b> 3.1. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
-# Bắt đầu với healthcare data lakes: Sử dụng microservices
+# Cách chúng tôi xây dựng một "flywheel" để cải thiện bảo mật liên tục cho Amazon RDS
 
-Các data lake có thể giúp các bệnh viện và cơ sở y tế chuyển dữ liệu thành những thông tin chi tiết về doanh nghiệp và duy trì hoạt động kinh doanh liên tục, đồng thời bảo vệ quyền riêng tư của bệnh nhân. **Data lake** là một kho lưu trữ tập trung, được quản lý và bảo mật để lưu trữ tất cả dữ liệu của bạn, cả ở dạng ban đầu và đã xử lý để phân tích. data lake cho phép bạn chia nhỏ các kho chứa dữ liệu và kết hợp các loại phân tích khác nhau để có được thông tin chi tiết và đưa ra các quyết định kinh doanh tốt hơn.
+> bởi Joshua Brindle
 
-Bài đăng trên blog này là một phần của loạt bài lớn hơn về việc bắt đầu cài đặt data lake dành cho lĩnh vực y tế. Trong bài đăng blog cuối cùng của tôi trong loạt bài, *“Bắt đầu với data lake dành cho lĩnh vực y tế: Đào sâu vào Amazon Cognito”*, tôi tập trung vào các chi tiết cụ thể của việc sử dụng Amazon Cognito và Attribute Based Access Control (ABAC) để xác thực và ủy quyền người dùng trong giải pháp data lake y tế. Trong blog này, tôi trình bày chi tiết cách giải pháp đã phát triển ở cấp độ cơ bản, bao gồm các quyết định thiết kế mà tôi đã đưa ra và các tính năng bổ sung được sử dụng. Bạn có thể truy cập các code samples cho giải pháp tại Git repo này để tham khảo.
+Bài viết này mô tả quy trình mà một nhóm bảo mật AWS đã thực hiện để bảo vệ một tính năng mới, **PL/Rust**, trên **Amazon Relational Database Service (Amazon RDS)**. Tác giả (principal security engineer) giải thích cách nhóm vượt ra ngoài triển khai tối thiểu để xây dựng một hệ thống bảo mật toàn diện, tự cải thiện – một "flywheel" – kết hợp công nghệ, quy trình và kiểm thử nhằm bảo vệ khách hàng.
 
 ---
 
-## Hướng dẫn kiến trúc
+## Các thành phần của hệ thống
 
-Thay đổi chính kể từ lần trình bày cuối cùng của kiến trúc tổng thể là việc tách dịch vụ đơn lẻ thành một tập hợp các dịch vụ nhỏ để cải thiện khả năng bảo trì và tính linh hoạt. Việc tích hợp một lượng lớn dữ liệu y tế khác nhau thường yêu cầu các trình kết nối chuyên biệt cho từng định dạng; bằng cách giữ chúng được đóng gói riêng biệt với microservices, chúng ta có thể thêm, xóa và sửa đổi từng trình kết nối mà không ảnh hưởng đến những kết nối khác. Các microservices được kết nối rời thông qua tin nhắn publish/subscribe tập trung trong cái mà tôi gọi là “pub/sub hub”.
-
-Giải pháp này đại diện cho những gì tôi sẽ coi là một lần lặp nước rút hợp lý khác từ last post của tôi. Phạm vi vẫn được giới hạn trong việc nhập và phân tích cú pháp đơn giản của các **HL7v2 messages** được định dạng theo **Quy tắc mã hóa 7 (ER7)** thông qua giao diện REST.
-
-**Kiến trúc giải pháp bây giờ như sau:**
-
-> *Hình 1. Kiến trúc tổng thể; những ô màu thể hiện những dịch vụ riêng biệt.*
+Trung tâm của dự án là **PL/Rust**, một extension cho phép người dùng viết các hàm PostgreSQL tùy chỉnh bằng **Rust**, sau đó được biên dịch thành native machine code hiệu năng cao. Lõi của extension này là thư viện có tên **postgrestd**, được thiết kế để ngăn việc "thoát" khỏi phạm vi cơ sở dữ liệu (database escape). Tuy nhiên, tại thời điểm đó, thư viện còn mới và chưa được "harden" cho thực tế môi trường production quy mô lớn.
+<br><br>
+Thách thức bảo mật chính xuất phát từ việc PL/Rust biên dịch các extension này trực tiếp trên chính database instance. Thiết kế này yêu cầu toàn bộ development toolchain phải sẵn có cục bộ, làm tăng đáng kể rủi ro tiềm ẩn. Một extension được xây kém có thể làm mất ổn định database hoặc host instance của nó, và attacker có thể dùng nhiều kỹ thuật để tìm cách vượt qua các kiểm soát bảo mật như mô hình **viết hoặc loại trừ thực hiện [write xor execute] (W^X)**. Bối cảnh đó cho thấy cần một chuỗi các biện pháp giảm thiểu (mitigations) vững chắc để cung cấp tính năng này một cách an toàn cho khách hàng.
 
 ---
 
-Mặc dù thuật ngữ *microservices* có một số sự mơ hồ cố hữu, một số đặc điểm là chung:  
-- Chúng nhỏ, tự chủ, kết hợp rời rạc  
-- Có thể tái sử dụng, giao tiếp thông qua giao diện được xác định rõ  
-- Chuyên biệt để giải quyết một việc  
-- Thường được triển khai trong **event-driven architecture**
+## Thách thức cách tiếp cận
 
-Khi xác định vị trí tạo ranh giới giữa các microservices, cần cân nhắc:  
-- **Nội tại**: công nghệ được sử dụng, hiệu suất, độ tin cậy, khả năng mở rộng  
-- **Bên ngoài**: chức năng phụ thuộc, tần suất thay đổi, khả năng tái sử dụng  
-- **Con người**: quyền sở hữu nhóm, quản lý *cognitive load*
+Văn hóa AWS đề cao operational excellence – tập trung vào automation, resilience và simplicity – đã ảnh hưởng mạnh mẽ đến quá trình tìm giải pháp. Nhóm đã cân nhắc **SELinux (Security-Enhanced Linux)**, được mô tả là một lựa chọn từng tranh luận lâu dài. SELinux là tập hợp các kernel features thực thi **mandatory access control (MAC)**, bổ sung một lớp bảo vệ mạnh phía trên hệ thống authorization tiêu chuẩn. Với SELinux policies, administrator có thể đặc tả cực kỳ chi tiết những gì được phép trên hệ thống; ví dụ: ngăn một process ghi vào file ngay cả khi quyền sở hữu thông thường cho phép.
+<br><br>
+Mức độ kiểm soát tất định (deterministic control) này có thể nâng cao đáng kể bảo mật của hệ điều hành. Đổi lại là giảm tính linh hoạt và nỗ lực đáng kể để cấu hình các access controls đáp ứng yêu cầu bảo mật cụ thể. Sau một cuộc tranh luận nội bộ kỹ lưỡng (senior leaders thách thức ý tưởng để dự đoán vấn đề tương lai), nhóm thống nhất rằng cho trường hợp sử dụng PL/Rust, lợi ích của SELinux vượt trội so với hạn chế. Quyết định được đưa ra để tiếp tục theo hướng này.
 
 ---
 
-## Lựa chọn công nghệ và phạm vi giao tiếp
+## Xây dựng "Security Flywheel"
 
-| Phạm vi giao tiếp                        | Các công nghệ / mô hình cần xem xét                                                        |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Trong một microservice                   | Amazon Simple Queue Service (Amazon SQS), AWS Step Functions                               |
-| Giữa các microservices trong một dịch vụ | AWS CloudFormation cross-stack references, Amazon Simple Notification Service (Amazon SNS) |
-| Giữa các dịch vụ                         | Amazon EventBridge, AWS Cloud Map, Amazon API Gateway                                      |
+Chỉ triển khai một công cụ là chưa đủ; nhóm đã xây dựng một quy trình hoàn chỉnh, liên tục cải tiến quanh nó.
 
----
+1. **Enforce & Monitor**: Xây dựng môi trường SELinux và tạo policies để "lock down" hệ thống. Điểm then chốt: cấu hình các policy gửi mọi **tin nhắn từ chối (denial messages)** đến hệ thống telemetry nội bộ để phân tích.
+2. **Respond**: Phối hợp với internal blue team, họ phát triển các **incident response playbooks** cụ thể cho đội Amazon RDS điều tra các denial messages này.
+3. **Test & Refine**: Bắt đầu chạy hàng quý các **"game days"**. Trong các bài diễn tập này, red team dàn dựng exploit nhắm vào hệ thống, và service team phản hồi bằng playbook. Sau đó tất cả các đội phân tích phản hồi để tìm bottlenecks và vùng cần cải thiện.
 
-## The pub/sub hub
-
-Việc sử dụng kiến trúc **hub-and-spoke** (hay message broker) hoạt động tốt với một số lượng nhỏ các microservices liên quan chặt chẽ.  
-- Mỗi microservice chỉ phụ thuộc vào *hub*  
-- Kết nối giữa các microservice chỉ giới hạn ở nội dung của message được xuất  
-- Giảm số lượng synchronous calls vì pub/sub là *push* không đồng bộ một chiều
-
-Nhược điểm: cần **phối hợp và giám sát** để tránh microservice xử lý nhầm message.
+Chu trình enforcement → monitoring → response → testing tạo nên một cỗ máy bảo mật nhịp nhàng, chắc chắn.
 
 ---
 
-## Core microservice
+## Flywheel vận hành: Ví dụ thực tế
 
-Cung cấp dữ liệu nền tảng và lớp truyền thông, gồm:  
-- **Amazon S3** bucket cho dữ liệu  
-- **Amazon DynamoDB** cho danh mục dữ liệu  
-- **AWS Lambda** để ghi message vào data lake và danh mục  
-- **Amazon SNS** topic làm *hub*  
-- **Amazon S3** bucket cho artifacts như mã Lambda
+Hiệu quả của hệ thống được kiểm chứng trong môi trường production. Một SELinux denial message tự động tạo một ticket mức độ nghiêm trọng cao cho service team. Hệ thống hoạt động đúng kỳ vọng: chặn thành công một hoạt động không được phép, đóng vai trò như một proactive intrusion detection system.
+<br><br>
+Dù rủi ro tức thời đã bị vô hiệu hóa, quy trình của nhóm yêu cầu phải điều tra root cause để xem hệ thống còn cải thiện được không. Cuộc điều tra cuối cùng cho thấy hoạt động được khởi xướng bởi nhóm nghiên cứu tại Varonis Threat Labs. Đội bảo mật AWS sau đó liên hệ để hợp tác, minh họa cách một security event có thể dẫn tới tương tác tích cực với cộng đồng nghiên cứu. Sự cố này cung cấp một ví dụ cụ thể và đáng giá về việc công việc chủ động của nhóm đã trực tiếp mang lại lợi ích cho khách hàng.
 
-> Chỉ cho phép truy cập ghi gián tiếp vào data lake qua hàm Lambda → đảm bảo nhất quán.
-
----
-
-## Front door microservice
-
-- Cung cấp API Gateway để tương tác REST bên ngoài  
-- Xác thực & ủy quyền dựa trên **OIDC** thông qua **Amazon Cognito**  
-- Cơ chế *deduplication* tự quản lý bằng DynamoDB thay vì SNS FIFO vì:
-  1. SNS deduplication TTL chỉ 5 phút
-  2. SNS FIFO yêu cầu SQS FIFO
-  3. Chủ động báo cho sender biết message là bản sao
-
----
-
-## Staging ER7 microservice
-
-- Lambda “trigger” đăng ký với pub/sub hub, lọc message theo attribute  
-- Step Functions Express Workflow để chuyển ER7 → JSON  
-- Hai Lambda:
-  1. Sửa format ER7 (newline, carriage return)
-  2. Parsing logic  
-- Kết quả hoặc lỗi được đẩy lại vào pub/sub hub
-
----
-
-## Tính năng mới trong giải pháp
-
-### 1. AWS CloudFormation cross-stack references
-Ví dụ *outputs* trong core microservice:
-```yaml
-Outputs:
-  Bucket:
-    Value: !Ref Bucket
-    Export:
-      Name: !Sub ${AWS::StackName}-Bucket
-  ArtifactBucket:
-    Value: !Ref ArtifactBucket
-    Export:
-      Name: !Sub ${AWS::StackName}-ArtifactBucket
-  Topic:
-    Value: !Ref Topic
-    Export:
-      Name: !Sub ${AWS::StackName}-Topic
-  Catalog:
-    Value: !Ref Catalog
-    Export:
-      Name: !Sub ${AWS::StackName}-Catalog
-  CatalogArn:
-    Value: !GetAtt Catalog.Arn
-    Export:
-      Name: !Sub ${AWS::StackName}-CatalogArn
+> Đối với các security engineers tham gia, đây là sự xác nhận sâu sắc vì nó đưa ra ví dụ cụ thể về cách nỗ lực chủ động của họ đã ngăn ngừa một vấn đề tiềm ẩn, mang lại lợi ích trực tiếp cho khách hàng.

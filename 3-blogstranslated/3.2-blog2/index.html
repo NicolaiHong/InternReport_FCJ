@@ -1,0 +1,306 @@
+<!doctype html><html lang=en class="js csstransforms3d"><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.134.3"><meta name=description content><meta name=author content="thienlh@thienlu.com"><link rel=icon href=../../images/favicon.png type=image/png><title>Blog 2 :: Internship Report</title>
+<link href=../../css/nucleus.css?1765371578 rel=stylesheet><link href=../../css/fontawesome-all.min.css?1765371578 rel=stylesheet><link href=../../css/hybrid.css?1765371578 rel=stylesheet><link href=../../css/featherlight.min.css?1765371578 rel=stylesheet><link href=../../css/perfect-scrollbar.min.css?1765371578 rel=stylesheet><link href=../../css/auto-complete.css?1765371578 rel=stylesheet><link href=../../css/atom-one-dark-reasonable.css?1765371578 rel=stylesheet><link href=../../css/theme.css?1765371578 rel=stylesheet><link href=../../css/hugo-theme.css?1765371578 rel=stylesheet><link href=../../css/theme-workshop.css?1765371578 rel=stylesheet><script src=../../js/jquery-3.3.1.min.js?1765371578></script><style>:root #header+#content>#left>#rlblock_left{display:none!important}</style></head><body data-url=../../3-blogstranslated/3.2-blog2/><nav id=sidebar class=showVisitedLinks><div id=header-wrapper><div id=header><a id=logo href=../../><svg id="Layer_1" data-name="Layer 1" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff}.cls-2{fill:#f90;fill-rule:evenodd}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09 10.85a4.7 4.7.0 00.19 1.48 7.73 7.73.0 00.54 1.19.77.77.0 01.12.38.64.64.0 01-.32.49l-1 .7a.83.83.0 01-.44.15.69.69.0 01-.49-.23 3.8 3.8.0 01-.6-.77q-.25-.42-.51-1a6.14 6.14.0 01-4.89 2.3 4.54 4.54.0 01-3.32-1.19 4.27 4.27.0 01-1.22-3.2 4.28 4.28.0 011.46-3.4A6.06 6.06.0 017.69 6.46a12.47 12.47.0 011.76.13q.92.13 1.91.36V5.73a3.65 3.65.0 00-.79-2.66A3.81 3.81.0 007.86 2.3a7.71 7.71.0 00-1.79.22 12.78 12.78.0 00-1.79.57 4.55 4.55.0 01-.58.22h-.26q-.35.0-.35-.52V2a1.09 1.09.0 01.12-.58 1.2 1.2.0 01.47-.35A10.88 10.88.0 015.77.32 10.19 10.19.0 018.36.0a6 6 0 014.35 1.35 5.49 5.49.0 011.38 4.09zM7.34 13.38a5.36 5.36.0 001.72-.31A3.63 3.63.0 0010.63 12 2.62 2.62.0 0011.19 11a5.63 5.63.0 00.16-1.44v-.7a14.35 14.35.0 00-1.53-.28 12.37 12.37.0 00-1.56-.1 3.84 3.84.0 00-2.47.67A2.34 2.34.0 005 11a2.35 2.35.0 00.61 1.76A2.4 2.4.0 007.34 13.38zm13.35 1.8a1 1 0 01-.64-.16 1.3 1.3.0 01-.35-.65L15.81 1.51a3 3 0 01-.15-.67.36.36.0 01.41-.41H17.7a1 1 0 01.65.16 1.4 1.4.0 01.33.65l2.79 11 2.59-11A1.17 1.17.0 0124.39.6a1.1 1.1.0 01.67-.16H26.4a1.1 1.1.0 01.67.16 1.17 1.17.0 01.32.65L30 12.39 32.88 1.25A1.39 1.39.0 0133.22.6a1 1 0 01.65-.16h1.54a.36.36.0 01.41.41 1.36 1.36.0 010 .26 3.64 3.64.0 01-.12.41l-4 12.86a1.3 1.3.0 01-.35.65 1 1 0 01-.64.16H29.25a1 1 0 01-.67-.17 1.26 1.26.0 01-.32-.67L25.67 3.64l-2.56 10.7a1.26 1.26.0 01-.32.67 1 1 0 01-.67.17zm21.36.44a11.28 11.28.0 01-2.56-.29 7.44 7.44.0 01-1.92-.67 1 1 0 01-.61-.93v-.84q0-.52.38-.52a.9.9.0 01.31.06l.42.17a8.77 8.77.0 001.83.58 9.78 9.78.0 002 .2 4.48 4.48.0 002.43-.55 1.76 1.76.0 00.86-1.57 1.61 1.61.0 00-.45-1.16A4.29 4.29.0 0043 9.22l-2.41-.76A5.15 5.15.0 0138 6.78a3.94 3.94.0 01-.83-2.41 3.7 3.7.0 01.45-1.85 4.47 4.47.0 011.19-1.37 5.27 5.27.0 011.7-.86A7.4 7.4.0 0142.6.0a8.87 8.87.0 011.12.07q.57.07 1.08.19t.95.26a4.27 4.27.0 01.7.29 1.59 1.59.0 01.49.41.94.94.0 01.15.55v.79q0 .52-.38.52a1.76 1.76.0 01-.64-.2 7.74 7.74.0 00-3.2-.64 4.37 4.37.0 00-2.21.47 1.6 1.6.0 00-.79 1.48 1.58 1.58.0 00.49 1.18 4.94 4.94.0 001.83.92L44.55 7a5.08 5.08.0 012.57 1.6A3.76 3.76.0 0147.9 11a4.21 4.21.0 01-.44 1.93 4.4 4.4.0 01-1.21 1.47 5.43 5.43.0 01-1.85.93A8.25 8.25.0 0142.05 15.62z"/><path class="cls-2" d="M45.19 23.81C39.72 27.85 31.78 30 25 30A36.64 36.64.0 01.22 20.57c-.51-.46-.06-1.09.56-.74A49.78 49.78.0 0025.53 26.4 49.23 49.23.0 0044.4 22.53C45.32 22.14 46.1 23.14 45.19 23.81z"/><path class="cls-2" d="M47.47 21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74 3.13-2.2 8.27-1.57 8.86-.83s-.16 5.89-3.09 8.35c-.45.38-.88.18-.68-.32C46.69 25.8 48.17 22.11 47.47 21.21z"/></svg></a></div><div class=searchbox><label for=search-by><i class="fas fa-search"></i></label>
+<input data-search-input id=search-by type=search placeholder=Search...>
+<span data-search-clear><i class="fas fa-times"></i></span></div><script type=text/javascript src=../../js/lunr.min.js?1765371578></script><script type=text/javascript src=../../js/auto-complete.js?1765371578></script><script type=text/javascript>var baseurl="https://nicolaihong.github.io/InternReport_FCJ/"</script><script type=text/javascript src=../../js/search.js?1765371578></script></div><div class=highlightable><ul class=topics><li data-nav-id=/1-worklog/ title=Worklog class=dd-item><a href=../../1-worklog/><b>1. </b>Worklog
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/1-worklog/1.1-week1/ title="Week 1 Worklog" class=dd-item><a href=../../1-worklog/1.1-week1/><b>1.1. </b>Week 1 Worklog
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.2-week2/ title="Week 2 Worklog" class=dd-item><a href=../../1-worklog/1.2-week2/><b>1.2. </b>Week 2 Worklog
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.12-week12/ title="Week 12 Worklog" class=dd-item><a href=../../1-worklog/1.12-week12/><b>1.12. </b>Week 12 Worklog
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.3-week3/ title="Week 3 Worklog" class=dd-item><a href=../../1-worklog/1.3-week3/><b>1.3. </b>Week 3 Worklog
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.4-week4/ title="Week 4 Worklog" class=dd-item><a href=../../1-worklog/1.4-week4/><b>1.4. </b>Week 4 Worklog
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.5-week5/ title="Week 5 Worklog" class=dd-item><a href=../../1-worklog/1.5-week5/><b>1.5. </b>Week 5 Worklog
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.6-week6/ title="Week 6 Worklog" class=dd-item><a href=../../1-worklog/1.6-week6/><b>1.6. </b>Week 6 Worklog
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.7-week7/ title="Week 7 Worklog" class=dd-item><a href=../../1-worklog/1.7-week7/><b>1.7. </b>Week 7 Worklog
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.8-week8/ title="Week 8 Worklog" class=dd-item><a href=../../1-worklog/1.8-week8/><b>1.8. </b>Week 8 Worklog
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.9-week9/ title="Week 9 Worklog" class=dd-item><a href=../../1-worklog/1.9-week9/><b>1.9. </b>Week 9 Worklog
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.10-week10/ title="Week 10 Worklog" class=dd-item><a href=../../1-worklog/1.10-week10/><b>1.10. </b>Week 10 Worklog
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/1-worklog/1.11-week11/ title="Week 11 Worklog" class=dd-item><a href=../../1-worklog/1.11-week11/><b>1.11. </b>Week 11 Worklog
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/2-proposal/ title=Proposal class=dd-item><a href=../../2-proposal/><b>2. </b>Proposal
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/3-blogstranslated/ title="Translated Blogs" class="dd-item
+parent"><a href=../../3-blogstranslated/><b>3. </b>Translated Blogs
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/3-blogstranslated/3.1-blog1/ title="Blog 1" class=dd-item><a href=../../3-blogstranslated/3.1-blog1/><b>3.1. </b>Blog 1
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/3-blogstranslated/3.2-blog2/ title="Blog 2" class="dd-item
+active"><a href=../../3-blogstranslated/3.2-blog2/><b>3.2. </b>Blog 2
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/3-blogstranslated/3.3-blog3/ title="Blog 3" class=dd-item><a href=../../3-blogstranslated/3.3-blog3/><b>3.3. </b>Blog 3
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/4-eventparticipated/ title="Events Participated In" class=dd-item><a href=../../4-eventparticipated/><b>4. </b>Events Participated In
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/4-eventparticipated/4.1-event1/ title="Kick-off AWS FCJ Workforce - FPTU OJT FALL 2025" class=dd-item><a href=../../4-eventparticipated/4.1-event1/><b>4.1. </b>Kick-off AWS FCJ Workforce - FPTU OJT FALL 2025
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/4-eventparticipated/4.2-event2/ title="Data Science On AWS" class=dd-item><a href=../../4-eventparticipated/4.2-event2/><b>4.2. </b>Data Science On AWS
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/4-eventparticipated/4.3-event3/ title="Reinventing DevOps with AWS Generative AI" class=dd-item><a href=../../4-eventparticipated/4.3-event3/><b>4.3. </b>Reinventing DevOps with AWS Generative AI
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/4-eventparticipated/4.4-event4/ title="Generative AI with Amazon Bedrock" class=dd-item><a href=../../4-eventparticipated/4.4-event4/><b>4.4. </b>Generative AI with Amazon Bedrock
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/4-eventparticipated/4.5-event5/ title="DevOps on AWS" class=dd-item><a href=../../4-eventparticipated/4.5-event5/><b>4.5. </b>DevOps on AWS
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/5-workshop/ title=Workshop class=dd-item><a href=../../5-workshop/><b>5. </b>Workshop
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/5-workshop/5.1-frontend-deployment/ title="Part 1: Frontend Deployment with CloudFront, WAF, and S3" class=dd-item><a href=../../5-workshop/5.1-frontend-deployment/><b>5.1. </b>Part 1: Frontend Deployment with CloudFront, WAF, and S3
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/5-workshop/5.1-frontend-deployment/5.1.1-prerequisite/ title=Prerequisites class=dd-item><a href=../../5-workshop/5.1-frontend-deployment/5.1.1-prerequisite/><b>5.1.1 </b>Prerequisites
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.1-frontend-deployment/5.1.2-s3-hosting/ title="S3 Static Website Hosting" class=dd-item><a href=../../5-workshop/5.1-frontend-deployment/5.1.2-s3-hosting/><b>5.1.2 </b>S3 Static Website Hosting
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.1-frontend-deployment/5.1.3-cloudfront-setup/ title="CloudFront Distribution Setup" class=dd-item><a href=../../5-workshop/5.1-frontend-deployment/5.1.3-cloudfront-setup/><b>5.1.3 </b>CloudFront Distribution Setup
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.1-frontend-deployment/5.1.4-waf/ title="AWS WAF Configuration" class=dd-item><a href=../../5-workshop/5.1-frontend-deployment/5.1.4-waf/><b>5.1.4 </b>AWS WAF Configuration
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.1-frontend-deployment/5.1.5-clean-up/ title="Part 4: Clean up" class=dd-item><a href=../../5-workshop/5.1-frontend-deployment/5.1.5-clean-up/><b>5.1.5 </b>Part 4: Clean up
+<i class="fas fa-check read-icon"></i></a></li></ul></li><li data-nav-id=/5-workshop/5.2-serverless-backend/ title="Part 2: Backend Deployment with API Gateway, Lambda, RDS, and Cognito" class=dd-item><a href=../../5-workshop/5.2-serverless-backend/><b>5.2 </b>Part 2: Backend Deployment with API Gateway, Lambda, RDS, and Cognito
+<i class="fas fa-check read-icon"></i></a><ul><li data-nav-id=/5-workshop/5.2-serverless-backend/5.2.1-prerequisite/ title=Prerequisites class=dd-item><a href=../../5-workshop/5.2-serverless-backend/5.2.1-prerequisite/><b>5.2.1 </b>Prerequisites
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.2-serverless-backend/5.2.2-vpc/ title="VPC and Network Setup" class=dd-item><a href=../../5-workshop/5.2-serverless-backend/5.2.2-vpc/><b>5.2.2 </b>VPC and Network Setup
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.2-serverless-backend/5.2.3-rds/ title="RDS Database Setup" class=dd-item><a href=../../5-workshop/5.2-serverless-backend/5.2.3-rds/><b>5.2.3 </b>RDS Database Setup
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.2-serverless-backend/5.2.4-secrets-manager/ title="AWS Secrets Manager Configuration" class=dd-item><a href=../../5-workshop/5.2-serverless-backend/5.2.4-secrets-manager/><b>5.2.4 </b>AWS Secrets Manager Configuration
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.2-serverless-backend/5.2.5-lambda/ title="Lambda Functions Development" class=dd-item><a href=../../5-workshop/5.2-serverless-backend/5.2.5-lambda/><b>5.2.5 </b>Lambda Functions Development
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.2-serverless-backend/5.2.6-api-gateway/ title="API Gateway Setup" class=dd-item><a href=../../5-workshop/5.2-serverless-backend/5.2.6-api-gateway/><b>5.2.6 </b>API Gateway Setup
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.2-serverless-backend/5.2.7-cognito/ title="Amazon Cognito Configuration" class=dd-item><a href=../../5-workshop/5.2-serverless-backend/5.2.7-cognito/><b>5.2.7 </b>Amazon Cognito Configuration
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.2-serverless-backend/5.2.8-frontend-integration/ title="Frontend Integration" class=dd-item><a href=../../5-workshop/5.2-serverless-backend/5.2.8-frontend-integration/><b>5.2.8 </b>Frontend Integration
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/5-workshop/5.2-serverless-backend/5.2.9-clean-up/ title="Clean up" class=dd-item><a href=../../5-workshop/5.2-serverless-backend/5.2.9-clean-up/><b>5.2.9 </b>Clean up
+<i class="fas fa-check read-icon"></i></a></li></ul></li></ul></li><li data-nav-id=/6-self-evaluation/ title=Self-Assessment class=dd-item><a href=../../6-self-evaluation/><b>6. </b>Self-Assessment
+<i class="fas fa-check read-icon"></i></a></li><li data-nav-id=/7-feedback/ title="Sharing and Feedback" class=dd-item><a href=../../7-feedback/><b>7. </b>Sharing and Feedback
+<i class="fas fa-check read-icon"></i></a></li></ul><section id=shortcuts><h3>More</h3><ul><li><a class=padding href=https://www.facebook.com/groups/awsstudygroupfcj/><i class='fab fa-facebook'></i> AWS Study Group</a></li></ul></section><section id=prefooter><hr><ul><li><a class=padding><i class="fas fa-language fa-fw"></i><div class=select-style><select id=select-language onchange="location=this.value"><option id=en value=https://nicolaihong.github.io/InternReport_FCJ/3-blogstranslated/3.2-blog2/ selected>English</option><option id=vi value=https://nicolaihong.github.io/InternReport_FCJ/vi/3-blogstranslated/3.2-blog2/>Tiếng Việt</option></select><svg id="Capa_1" xmlns:xlink="http://www.w3.org/1999/xlink" width="255" height="255" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255"><g><g id="arrow-drop-down"><polygon points="0,63.75 127.5,191.25 255,63.75"/></g></g></svg></div></a></li><li><a class=padding href=# data-clear-history-toggle><i class="fas fa-history fa-fw"></i> Clear History</a></li></ul></section><section id=footer><left><b>Workshop</b><br><img src="https://hitwebcounter.com/counter/counter.php?page=7920860&style=0038&nbdigits=9&type=page&initCount=0" title=Migrate alt="web counter" border=0></a><br><b><a href=https://cloudjourney.awsstudygroup.com/>Cloud Journey</a></b><br><img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" alt="web counter" border=0>
+</left><left><br><br><b>Last Updated</b><br><i><span id=lastUpdated style=color:orange></span>
+</i><script>const today=new Date,formattedDate=today.toLocaleDateString("en-GB");document.getElementById("lastUpdated").textContent=formattedDate</script></left><left><br><br><b>Team</b><br><i><a href=https://www.facebook.com/groups/660548818043427 style=color:orange>First Cloud Journey</a><br></i></left><script async defer src=https://buttons.github.io/buttons.js></script></section></div></nav><section id=body><div id=overlay></div><div class="padding highlightable"><div><div id=top-bar><div id=breadcrumbs itemscope itemtype=http://data-vocabulary.org/Breadcrumb><span id=sidebar-toggle-span><a href=# id=sidebar-toggle data-sidebar-toggle><i class="fas fa-bars"></i>
+</a></span><span id=toc-menu><i class="fas fa-list-alt"></i></span>
+<span class=links><a href=../../>Internship Report</a> > <a href=../../3-blogstranslated/>Translated Blogs</a> > Blog 2</span></div><div class=progress><div class=wrapper><nav id=TableOfContents><ul><li><a href=#solution-overview>Solution Overview</a></li><li><a href=#prerequisites>Prerequisites</a></li><li><a href=#the-java-program>The Java Program</a></li><li><a href=#compile-and-run>Compile and Run</a></li><li><a href=#considerations>Considerations</a></li><li><a href=#troubleshooting>Troubleshooting</a></li><li><a href=#conclusion>Conclusion</a></li></ul></nav></div></div></div></div><div id=head-tags></div><div id=body-inner><h1>Blog 2</h1><h1 id=create-an-ssl-connection-to-amazon-rds-for-db2-in-java-without-keystore-or-keytool>Create an SSL connection to Amazon RDS for Db2 in Java without KeyStore or Keytool</h1><blockquote><p>by Vikram Khatri, Amine Yahsine, Ashish Saraswat, and Sumit Kumar</p></blockquote><p>This article outlines a simplified method for establishing a secure SSL database connection in Java, specifically for Amazon Relational Database Service (Amazon RDS) for Db2. The approach allows developers to bypass the traditional complexities associated with the <code>keytool</code> utility and the management of Java KeyStores. The primary benefits of this technique include its simplicity, its suitability for automated environments like CI/CD pipelines, and its ability to maintain strong security through proper TLS 1.2 negotiation and server certificate validation.</p><hr><h2 id=solution-overview>Solution Overview</h2><p>Instead of relying on a traditional Java TrustStore, this solution leverages a specific configuration property supported by the IBM JDBC driver. The driver can be instructed to use a PEM-formatted server certificate directly, which eliminates the need to convert the certificate or import it into a <code>.jks</code> file.</p><p>This is accomplished by setting the <code>sslCertLocation</code> property:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>properties.<span style=color:#a6e22e>put</span>(<span style=color:#e6db74>&#34;sslCertLocation&#34;</span>, <span style=color:#e6db74>&#34;/path/to/certchain.pem&#34;</span>);
+</span></span></code></pre></div><p>To ensure the connection is encrypted and uses a secure protocol, the following JDBC driver connection properties must also be set:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>sslConnection<span style=color:#f92672>=</span><span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span>sslVersion<span style=color:#f92672>=</span>TLSv1.<span style=color:#a6e22e>2</span>
+</span></span></code></pre></div><p>This method is particularly well-suited for cloud environments like AWS, where Amazon RDS provides a PEM-formatted certificate bundle. The solution was tested with an IBM Db2 JDBC Driver (<code>db2jcc4.jar</code> v4.33.31), Java 11+, and a PEM certificate from Amazon RDS.</p><hr><h2 id=prerequisites>Prerequisites</h2><p>Before implementing this solution, the following resources are assumed to be in place:</p><ul><li>An Amazon RDS for Db2 server instance with SSL already enabled.</li><li>A certificate chain PEM file, such as the region-specific <code>us-east-1-bundle.pem</code> available for download from AWS.</li><li>A recent version of the IBM Data Server Driver (<code>db2jcc4.jar</code> version 4.33 or later).</li><li>Java 8 or higher, with support for TLS 1.2.</li></ul><hr><h2 id=the-java-program>The Java Program</h2><p>The full source code for a Java program (<code>Db2SSLTest.java</code>) that connects to Amazon RDS for Db2 using this SSL method is provided below:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>import</span> java.sql.*;
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.Properties;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Db2SSLTest</span> {
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span>(String<span style=color:#f92672>[]</span> args) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (args.<span style=color:#a6e22e>length</span> <span style=color:#f92672>!=</span> 6) {
+</span></span><span style=display:flex><span>      System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Usage: java Db2SSLTest &#34;</span> <span style=color:#f92672>+</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34; &lt;certchain.pem&gt; &#34;</span> <span style=color:#f92672>+</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;  &lt;hostname&gt; &lt;port&gt; &lt;database&gt; &lt;userid&gt; &lt;password&gt;&#34;</span>);
+</span></span><span style=display:flex><span>      System.<span style=color:#a6e22e>exit</span>(1);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    Properties properties <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Properties();
+</span></span><span style=display:flex><span>    String certPath <span style=color:#f92672>=</span> args<span style=color:#f92672>[</span>0<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>    String hostname <span style=color:#f92672>=</span> args<span style=color:#f92672>[</span>1<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>    String port <span style=color:#f92672>=</span> args<span style=color:#f92672>[</span>2<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>    String database <span style=color:#f92672>=</span> args<span style=color:#f92672>[</span>3<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>    String userid <span style=color:#f92672>=</span> args<span style=color:#f92672>[</span>4<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>    String password <span style=color:#f92672>=</span> args<span style=color:#f92672>[</span>5<span style=color:#f92672>]</span>;
+</span></span><span style=display:flex><span>    properties.<span style=color:#a6e22e>put</span>(<span style=color:#e6db74>&#34;sslConnection&#34;</span>, <span style=color:#e6db74>&#34;true&#34;</span>);
+</span></span><span style=display:flex><span>    properties.<span style=color:#a6e22e>put</span>(<span style=color:#e6db74>&#34;sslVersion&#34;</span>, <span style=color:#e6db74>&#34;TLSv1.2&#34;</span>);
+</span></span><span style=display:flex><span>    properties.<span style=color:#a6e22e>put</span>(<span style=color:#e6db74>&#34;sslCertLocation&#34;</span>, certPath);
+</span></span><span style=display:flex><span>    properties.<span style=color:#a6e22e>put</span>(<span style=color:#e6db74>&#34;user&#34;</span>, userid);
+</span></span><span style=display:flex><span>    properties.<span style=color:#a6e22e>put</span>(<span style=color:#e6db74>&#34;password&#34;</span>, password);
+</span></span><span style=display:flex><span>    String url <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;jdbc:db2://&#34;</span> <span style=color:#f92672>+</span> hostname <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;:&#34;</span> <span style=color:#f92672>+</span>
+</span></span><span style=display:flex><span>        port <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;/&#34;</span> <span style=color:#f92672>+</span> database;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>try</span> {
+</span></span><span style=display:flex><span>      Class.<span style=color:#a6e22e>forName</span>(<span style=color:#e6db74>&#34;com.ibm.db2.jcc.DB2Driver&#34;</span>);
+</span></span><span style=display:flex><span>      Connection conn <span style=color:#f92672>=</span> DriverManager.<span style=color:#a6e22e>getConnection</span>(url,
+</span></span><span style=display:flex><span>                          properties);
+</span></span><span style=display:flex><span>      Statement stmt <span style=color:#f92672>=</span> conn.<span style=color:#a6e22e>createStatement</span>();
+</span></span><span style=display:flex><span>      ResultSet rs <span style=color:#f92672>=</span> stmt.<span style=color:#a6e22e>executeQuery</span>(<span style=color:#e6db74>&#34;SELECT CURRENT &#34;</span> <span style=color:#f92672>+</span>
+</span></span><span style=display:flex><span>          <span style=color:#e6db74>&#34; TIMESTAMP &#34;</span> <span style=color:#f92672>+</span>
+</span></span><span style=display:flex><span>          <span style=color:#e6db74>&#34; FROM SYSIBM.SYSDUMMY1&#34;</span>);
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span> (rs.<span style=color:#a6e22e>next</span>()) {
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;SSL Connection successful!&#34;</span>);
+</span></span><span style=display:flex><span>        System.<span style=color:#a6e22e>out</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Current timestamp: &#34;</span> <span style=color:#f92672>+</span>
+</span></span><span style=display:flex><span>           rs.<span style=color:#a6e22e>getString</span>(1));
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>      rs.<span style=color:#a6e22e>close</span>();
+</span></span><span style=display:flex><span>      stmt.<span style=color:#a6e22e>close</span>();
+</span></span><span style=display:flex><span>      conn.<span style=color:#a6e22e>close</span>();
+</span></span><span style=display:flex><span>    } <span style=color:#66d9ef>catch</span> (Exception e) {
+</span></span><span style=display:flex><span>      System.<span style=color:#a6e22e>err</span>.<span style=color:#a6e22e>println</span>(<span style=color:#e6db74>&#34;Error: &#34;</span> <span style=color:#f92672>+</span> e.<span style=color:#a6e22e>getMessage</span>());
+</span></span><span style=display:flex><span>      e.<span style=color:#a6e22e>printStackTrace</span>();
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><hr><h2 id=compile-and-run>Compile and Run</h2><p>Assuming the IBM JDBC driver is located at <code>~/sqllib/java/db2jcc4.jar</code>, the following shell script illustrates how to compile and run the Java program. The script also includes a function to retrieve the database password from AWS Secrets Manager or prompt the user for it manually.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/usr/bin/env bash
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#75715e># Retrieves the master user password for a specified DB instance.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># This function attempts to obtain the master user password for the provided</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># DB instance ID. It first checks if the password can be retrieved from the</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># AWS Secrets Manager. If a valid secret is not found, it prompts the user</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># to manually enter the password.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Args:</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#     DB_INSTANCE_ID (str): The database instance identifier.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Environment Variables:</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#     REGION: The AWS region where the DB instance is located.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Exports:</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#     MASTER_USER_PASSWORD: The retrieved or entered master user password.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Returns:</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#     int: Returns 1 if the password retrieval fails, otherwise 0.</span>
+</span></span><span style=display:flex><span>get_master_password<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span> DB_INSTANCE_ID<span style=color:#f92672>=</span>$1
+</span></span><span style=display:flex><span> SECRET_ARN<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>aws rds describe-db-instances <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span> --db-instance-identifier <span style=color:#e6db74>&#34;</span>$DB_INSTANCE_ID<span style=color:#e6db74>&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span> --region $REGION <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span> --query <span style=color:#e6db74>&#34;DBInstances[0].MasterUserSecret.SecretArn&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span> --output text<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>[[</span> -z <span style=color:#e6db74>&#34;</span>$SECRET_ARN<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>||</span> <span style=color:#e6db74>&#34;</span>$SECRET_ARN<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;None&#34;</span> <span style=color:#f92672>]]</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>   read -rsp <span style=color:#e6db74>&#34;Enter Master User password: &#34;</span> MASTER_USER_PASSWORD
+</span></span><span style=display:flex><span>   echo
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>   SECRET_JSON<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>aws secretsmanager get-secret-value <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>     --secret-id <span style=color:#e6db74>&#34;</span>$SECRET_ARN<span style=color:#e6db74>&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>     --query <span style=color:#e6db74>&#34;SecretString&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>     --region $REGION <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>     --output text<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>   MASTER_USER_PASSWORD<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>jq -r <span style=color:#e6db74>&#39;.password&#39;</span> <span style=color:#f92672>&lt;&lt;&lt;</span> <span style=color:#e6db74>&#34;</span>$SECRET_JSON<span style=color:#e6db74>&#34;</span><span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>   <span style=color:#66d9ef>if</span> <span style=color:#f92672>[[</span> -z <span style=color:#e6db74>&#34;</span>$MASTER_USER_PASSWORD<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>]]</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>     echo <span style=color:#e6db74>&#34;Failed to get password from secret manager &#39;</span>$SECRET_ARN<span style=color:#e6db74>&#39;. Exiting...&#34;</span>
+</span></span><span style=display:flex><span>     <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>   <span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span>   export MASTER_USER_PASSWORD<span style=color:#f92672>=</span>$MASTER_USER_PASSWORD
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Retrieves the master user name for a specified DB instance.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># This function queries AWS RDS to obtain the master user name for the provided</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># DB instance identifier. If the master user name is not found, it returns an</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># error message.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Environment Variables:</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#     DB_INSTANCE_IDENTIFIER: The database instance identifier.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#     REGION: The AWS region where the DB instance is located.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Exports:</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#     MASTER_USER_NAME: The retrieved master user name.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Returns:</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#     int: Returns 1 if the master user name is not found, otherwise 0.</span>
+</span></span><span style=display:flex><span>get_master_user_name<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span> local master_user_name<span style=color:#f92672>=(</span><span style=color:#66d9ef>$(</span>aws rds describe-db-instances <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>   --db-instance-identifier <span style=color:#e6db74>&#34;</span>$DB_INSTANCE_IDENTIFIER<span style=color:#e6db74>&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>   --region $REGION <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>   --query <span style=color:#e6db74>&#34;DBInstances[0].MasterUsername&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>   --output text<span style=color:#66d9ef>)</span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> <span style=color:#e6db74>&#34;</span>$master_user_name<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;None&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>   echo <span style=color:#e6db74>&#34;Not found&#34;</span>
+</span></span><span style=display:flex><span>   <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>   export MASTER_USER_NAME<span style=color:#f92672>=</span>$master_user_name
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Retrieves the database address for a specified DB instance.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># This function queries AWS RDS to obtain the database endpoint address for the</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># provided DB instance identifier. If the address is not found, it returns an</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># error message.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Environment Variables:</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#     DB_INSTANCE_IDENTIFIER: The database instance identifier.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#     REGION: The AWS region where the DB instance is located.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Exports:</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#     DB_ADDRESS: The retrieved database endpoint address.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Returns:</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#     int: Returns 1 if the database address is not found, otherwise 0.</span>
+</span></span><span style=display:flex><span>get_db_address<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span> local db_address<span style=color:#f92672>=(</span><span style=color:#66d9ef>$(</span>aws rds describe-db-instances <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>   --db-instance-identifier <span style=color:#e6db74>&#34;</span>$DB_INSTANCE_IDENTIFIER<span style=color:#e6db74>&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>   --region $REGION <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>   --query <span style=color:#e6db74>&#34;DBInstances[0].Endpoint.Address&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>   --output text<span style=color:#66d9ef>)</span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> -z <span style=color:#e6db74>&#34;</span>$db_address<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>   echo <span style=color:#e6db74>&#34;Not found&#34;</span>
+</span></span><span style=display:flex><span>   <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>   export DB_ADDRESS<span style=color:#f92672>=</span>$db_address
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Retrieves the SSL port number for a specified DB instance.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># This function queries AWS RDS to obtain the parameter group name associated</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># with the provided DB instance identifier, and then queries the parameter</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># group to obtain the SSL port number. If the SSL port is not found, it returns</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># an error message.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Environment Variables:</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#     DB_INSTANCE_IDENTIFIER: The database instance identifier.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#     REGION: The AWS region where the DB instance is located.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Exports:</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#     SSL_PORT: The retrieved SSL port number.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Returns:</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#     int: Returns 1 if the SSL port is not found, otherwise 0.</span>
+</span></span><span style=display:flex><span>get_ssl_port<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span> SSL_PORT<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;&#34;</span>
+</span></span><span style=display:flex><span> DB_PARAM_GROUP_NAME<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>aws rds describe-db-instances <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>     --db-instance-identifier <span style=color:#e6db74>&#34;</span>$DB_INSTANCE_IDENTIFIER<span style=color:#e6db74>&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>     --region $REGION <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>     --query <span style=color:#e6db74>&#34;DBInstances[0].DBParameterGroups[0].DBParameterGroupName&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>     --output text<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> <span style=color:#e6db74>&#34;</span>$DB_PARAM_GROUP_NAME<span style=color:#e6db74>&#34;</span> !<span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>   SSL_PORT<span style=color:#f92672>=</span><span style=color:#66d9ef>$(</span>aws rds describe-db-parameters <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>       --db-parameter-group-name <span style=color:#e6db74>&#34;</span>$DB_PARAM_GROUP_NAME<span style=color:#e6db74>&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>       --region $REGION <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>       --query <span style=color:#e6db74>&#34;Parameters[?ParameterName==&#39;ssl_svcename&#39;].ParameterValue&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>       --output text<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>   <span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> <span style=color:#e6db74>&#34;</span>$SSL_PORT<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;None&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>     SSL_PORT<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;&#34;</span>
+</span></span><span style=display:flex><span>     <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>   <span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span> export SSL_PORT<span style=color:#f92672>=</span>$SSL_PORT
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Main entry point for the script.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># This function compiles a Java program, downloads the SSL certificate, retrieves</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># the master user name, master password, database address, and SSL port from AWS</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># RDS, and then runs the Java program with the retrieved parameters.</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Exports:</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#     None</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span><span style=color:#75715e># Returns:</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#     int: Returns 0 if the program runs successfully, otherwise 1.</span>
+</span></span><span style=display:flex><span>main <span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span> DB_INSTANCE_IDENTIFIER<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;viz-demo&#34;</span>
+</span></span><span style=display:flex><span> CL_PATH<span style=color:#f92672>=</span>.:$HOME/sqllib/java/db2jcc4.jar
+</span></span><span style=display:flex><span> REGION<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;us-east-1&#34;</span>
+</span></span><span style=display:flex><span> PROG_NAME<span style=color:#f92672>=</span>Db2SSLTest
+</span></span><span style=display:flex><span> JAVA_FILE<span style=color:#f92672>=</span><span style=color:#e6db74>${</span>PROG_NAME<span style=color:#e6db74>}</span>.java
+</span></span><span style=display:flex><span> DBNAME<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;TEST&#34;</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>if</span> ! command -v javac &amp;&gt;/dev/null; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>   echo <span style=color:#e6db74>&#34;javac is not installed. Please install Java Development Kit (JDK) to compile Java programs.&#34;</span>
+</span></span><span style=display:flex><span>   exit <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span> echo <span style=color:#e6db74>&#34;Compile Java program </span>$JAVA_FILE<span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span> javac -cp $CL_PATH $JAVA_FILE
+</span></span><span style=display:flex><span> echo <span style=color:#e6db74>&#34;Downloading SSL certificate...&#34;</span>
+</span></span><span style=display:flex><span> CERTCHAIN<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;/home/db2inst1/us-east-1-bundle.pem&#34;</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> -f <span style=color:#e6db74>&#34;</span>$CERTCHAIN<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>   echo <span style=color:#e6db74>&#34;Certificate already exists. Skipping download.&#34;</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>   echo <span style=color:#e6db74>&#34;Certificate does not exist. Downloading...&#34;</span>
+</span></span><span style=display:flex><span>   <span style=color:#66d9ef>if</span> ! curl -sL <span style=color:#e6db74>&#34;https://truststore.pki.rds.amazonaws.com/us-east-1/</span>$REGION<span style=color:#e6db74>-bundle.pem&#34;</span> -o $REGION-bundle.pem; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>     echo <span style=color:#e6db74>&#34;Failed to download SSL certificate. Please check your network connection or the URL.&#34;</span>
+</span></span><span style=display:flex><span>     exit <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span>   <span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>if</span> get_master_user_name <span style=color:#e6db74>&#34;</span>$DB_INSTANCE_IDENTIFIER<span style=color:#e6db74>&#34;</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>   echo <span style=color:#e6db74>&#34;Master user name: </span>$MASTER_USER_NAME<span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>   USER<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$MASTER_USER_NAME<span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>   echo <span style=color:#e6db74>&#34;Failed to retrieve master user name. Exiting...&#34;</span>
+</span></span><span style=display:flex><span>   exit <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>if</span> get_master_password <span style=color:#e6db74>&#34;</span>$DB_INSTANCE_IDENTIFIER<span style=color:#e6db74>&#34;</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>   PASSWORD<span style=color:#f92672>=</span>$MASTER_USER_PASSWORD
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>   echo <span style=color:#e6db74>&#34;Failed to retrieve master password. Exiting...&#34;</span>
+</span></span><span style=display:flex><span>   exit <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>if</span> get_db_address <span style=color:#e6db74>&#34;</span>$DB_INSTANCE_IDENTIFIER<span style=color:#e6db74>&#34;</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>   echo <span style=color:#e6db74>&#34;DB Address: </span>$DB_ADDRESS<span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>   HOST<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$DB_ADDRESS<span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>   echo <span style=color:#e6db74>&#34;Failed to retrieve DB address. Exiting...&#34;</span>
+</span></span><span style=display:flex><span>   exit <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>if</span> get_ssl_port <span style=color:#e6db74>&#34;</span>$DB_INSTANCE_IDENTIFIER<span style=color:#e6db74>&#34;</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span>   echo <span style=color:#e6db74>&#34;SSL Port: </span>$SSL_PORT<span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span>   PORT<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$SSL_PORT<span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>   echo <span style=color:#e6db74>&#34;Failed to retrieve SSL port. Exiting...&#34;</span>
+</span></span><span style=display:flex><span>   exit <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span> <span style=color:#75715e># Use -Djavax.net.debug=ssl:handshake:verbose to debug SSL issues</span>
+</span></span><span style=display:flex><span> echo <span style=color:#e6db74>&#34;Running Java program...&#34;</span>
+</span></span><span style=display:flex><span> java <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span> -cp <span style=color:#e6db74>&#34;</span>$CL_PATH<span style=color:#e6db74>&#34;</span> $PROG_NAME $CERTCHAIN $HOST $PORT $DBNAME $USER $PASSWORD
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>main <span style=color:#e6db74>&#34;</span>$@<span style=color:#e6db74>&#34;</span>
+</span></span></code></pre></div><hr><h2 id=considerations>Considerations</h2><p>There is a limitation in the JDBC driver (at the time of writing) that prevents the use of a global certificate bundle (like <code>global-bundle.pem</code>) with the <code>sslCertLocation</code> property. If an application connects to a single AWS Region, it is recommended to use a region-specific certificate file (e.g., <code>us-east-1-bundle.pem</code>). If there is an absolute requirement to use the global bundle, developers must revert to the traditional method of using <code>keytool</code> to store the certificates in a keystore.</p><hr><h2 id=troubleshooting>Troubleshooting</h2><p>The following are solutions to common issues:</p><ul><li><strong>Failing SSL connection:</strong> If the SSL connection fails after being enabled in the RDS for Db2 instance, the instance must be restarted. The SSL enablement only takes effect after a restart.</li><li><strong>Unable to locate the <code>db2jcc4.jar</code> file:</strong> This file is included with various IBM DB2 client packages, such as the data server client or runtime client.</li><li><strong>Unable to connect to the RDS database:</strong> If a connection fails after cataloging a database with SSL using <code>db2cli</code> commands, there might be an existing database connection that is not aware of the newly cataloged database. The <code>db2 terminate</code> command should be used to close existing connections before testing again.</li></ul><hr><h2 id=conclusion>Conclusion</h2><p>This post demonstrates that it is not always necessary to use the Java KeyStore or <code>keytool</code> utility to enable SSL connections. With a PEM certificate and a modern JDBC driver, a secure connection can be established with minimal setup. This approach is especially valuable for developers who need to perform rapid SSL testing, for automated environments such as CI/CD and containers, and for anyone looking to simplify secure Java-to-Db2 connectivity.</p><footer class=footline></footer></div></div><div id=navigation><a class="nav nav-prev" href=../../3-blogstranslated/3.1-blog1/ title="Blog 1"><i class="fa fa-chevron-left"></i></a>
+<a class="nav nav-next" href=../../3-blogstranslated/3.3-blog3/ title="Blog 3" style=margin-right:0><i class="fa fa-chevron-right"></i></a></div></section><div style=left:-1000px;overflow:scroll;position:absolute;top:-1000px;border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px><div style=border:none;box-sizing:content-box;height:200px;margin:0;padding:0;width:200px></div></div><script src=../../js/clipboard.min.js?1765371578></script><script src=../../js/perfect-scrollbar.min.js?1765371578></script><script src=../../js/perfect-scrollbar.jquery.min.js?1765371578></script><script src=../../js/jquery.sticky.js?1765371578></script><script src=../../js/featherlight.min.js?1765371578></script><script src=../../js/highlight.pack.js?1765371578></script><script>hljs.initHighlightingOnLoad()</script><script src=../../js/modernizr.custom-3.6.0.js?1765371578></script><script src=../../js/learn.js?1765371578></script><script src=../../js/hugo-learn.js?1765371578></script><link href=../../mermaid/mermaid.css?1765371578 rel=stylesheet><script src=../../mermaid/mermaid.js?1765371578></script><script>mermaid.initialize({startOnLoad:!0})</script><script>(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,(e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date),(i=t.createElement(n),a=t.getElementsByTagName(n)[0]),i.async=1,i.src=s,a.parentNode.insertBefore(i,a)})(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-158079754-2","auto"),ga("send","pageview")</script></body></html>

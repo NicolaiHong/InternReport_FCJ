@@ -1,126 +1,90 @@
 ---
 title: "Blog 3"
-date: "2025-09-09T19:53:52+07:00"
+date: "2025-10-10"
 weight: 1
 chapter: false
 pre: " <b> 3.3. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-# Getting Started with Healthcare Data Lakes: Using Microservices
+# Enhance the local testing experience for serverless applications with LocalStack
 
-Data lakes can help hospitals and healthcare facilities turn data into business insights, maintain business continuity, and protect patient privacy. A **data lake** is a centralized, managed, and secure repository to store all your data, both in its raw and processed forms for analysis. Data lakes allow you to break down data silos and combine different types of analytics to gain insights and make better business decisions.
+> by Patrick Galvin and Debasis Rath
 
-This blog post is part of a larger series on getting started with setting up a healthcare data lake. In my final post of the series, *“Getting Started with Healthcare Data Lakes: Diving into Amazon Cognito”*, I focused on the specifics of using Amazon Cognito and Attribute Based Access Control (ABAC) to authenticate and authorize users in the healthcare data lake solution. In this blog, I detail how the solution evolved at a foundational level, including the design decisions I made and the additional features used. You can access the code samples for the solution in this Git repo for reference.
+This article announces and explains new capabilities designed to simplify the local testing experience for serverless applications. Through an integration with **AWS Partner**, **LocalStack**, the **AWS Toolkit for Visual Studio Code** now provides a more streamlined way for developers to build, test, and debug their serverless applications without leaving their development environment.
 
 ---
 
-## Architecture Guidance
+## Challenges with Local Serverless Development
 
-The main change since the last presentation of the overall architecture is the decomposition of a single service into a set of smaller services to improve maintainability and flexibility. Integrating a large volume of diverse healthcare data often requires specialized connectors for each format; by keeping them encapsulated separately as microservices, we can add, remove, and modify each connector without affecting the others. The microservices are loosely coupled via publish/subscribe messaging centered in what I call the “pub/sub hub.”
+While serverless architectures are generally simple to operate and scale, the development and testing process can introduce friction that slows down the code-test-debug cycle. Developers often encounter several common roadblocks:
 
-This solution represents what I would consider another reasonable sprint iteration from my last post. The scope is still limited to the ingestion and basic parsing of **HL7v2 messages** formatted in **Encoding Rules 7 (ER7)** through a REST interface.
-
-**The solution architecture is now as follows:**
-
-> *Figure 1. Overall architecture; colored boxes represent distinct services.*
-
----
-
-While the term *microservices* has some inherent ambiguity, certain traits are common:  
-- Small, autonomous, loosely coupled  
-- Reusable, communicating through well-defined interfaces  
-- Specialized to do one thing well  
-- Often implemented in an **event-driven architecture**
-
-When determining where to draw boundaries between microservices, consider:  
-- **Intrinsic**: technology used, performance, reliability, scalability  
-- **Extrinsic**: dependent functionality, rate of change, reusability  
-- **Human**: team ownership, managing *cognitive load*
+- **Slow Iteration from Cloud-Based Validation:** Previously, developers had to deploy AWS Serverless Application Model (AWS SAM) templates to the cloud just to test changes, which created significant delays in the feedback loop.
+- **Friction from Tool Context Switching:** The need to constantly move between integrated development environments (IDEs), command-line interfaces (CLIs), and resource emulators like LocalStack leads to fragmented and inefficient workflows.
+- **Complex Manual Setup:** Manually configuring port mapping and making code edits for local integration tests can introduce inconsistencies between the local and cloud environments.
+- **Limited Service Integration Debugging:** Troubleshooting Lambda functions that interact with other AWS services, such as DynamoDB or Amazon SQS, has traditionally required complex manual configuration, extending the time needed to resolve issues.
 
 ---
 
-## Technology Choices and Communication Scope
+## Automated Setup Process
 
-| Communication scope                       | Technologies / patterns to consider                                                        |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Within a single microservice              | Amazon Simple Queue Service (Amazon SQS), AWS Step Functions                               |
-| Between microservices in a single service | AWS CloudFormation cross-stack references, Amazon Simple Notification Service (Amazon SNS) |
-| Between services                          | Amazon EventBridge, AWS Cloud Map, Amazon API Gateway                                      |
+The LocalStack VSCode Extension can be installed directly from the AWS Toolkit, which provides an intelligent wizard for a streamlined setup. This wizard automatically detects if LocalStack is configured and guides the user through the process. It also handles authentication through a browser-based flow and securely stores the token. Furthermore, the wizard checks for and creates the necessary AWS CLI profiles for LocalStack, allowing developers to easily switch between their local and cloud environments.
+
+![First](https://d2908q01vomqb2.cloudfront.net/1b6453892473a467d07372d45eb05abc2031647a/2025/09/12/ComputeBlog-2372-image-4.gif)
 
 ---
 
-## The Pub/Sub Hub
+## Testing a Serverless Application
 
-Using a **hub-and-spoke** architecture (or message broker) works well with a small number of tightly related microservices.  
-- Each microservice depends only on the *hub*  
-- Inter-microservice connections are limited to the contents of the published message  
-- Reduces the number of synchronous calls since pub/sub is a one-way asynchronous *push*
+The article demonstrates these capabilities with a practical example: an event-driven order processing system that uses API Gateway, Amazon SQS, Lambda, and Amazon Simple Notification Service (Amazon SNS).
 
-Drawback: **coordination and monitoring** are needed to avoid microservices processing the wrong message.
+![Second](/images/Blog3img1.png)
 
----
+With the new integration, the entire workflow can be tested locally:
 
-## Core Microservice
+- **Deploy Locally:** The AWS SAM application is deployed to the local LocalStack environment using the LocalStack AWS profile.
+  ![Third](https://d2908q01vomqb2.cloudfront.net/1b6453892473a467d07372d45eb05abc2031647a/2025/09/13/ComputeBlog-2372-build-deploy-3.gif)
+- **Debug Locally:** Developers can set breakpoints in their Lambda function code directly in VS Code and use the integrated debugger to step through the execution as it interacts with other locally emulated services.
+  ![Fourth](https://d2908q01vomqb2.cloudfront.net/1b6453892473a467d07372d45eb05abc2031647a/2025/09/13/ComputeBlog-2372-debug-2.gif)
+- **Validate End-to-End:** The complete workflow, from message ingestion at the API Gateway to the final notification from Amazon SNS, can be tested to confirm all service integrations work correctly before deploying to the cloud.
 
-Provides foundational data and communication layer, including:  
-- **Amazon S3** bucket for data  
-- **Amazon DynamoDB** for data catalog  
-- **AWS Lambda** to write messages into the data lake and catalog  
-- **Amazon SNS** topic as the *hub*  
-- **Amazon S3** bucket for artifacts such as Lambda code
+> For an in-depth technical demonstration of this LocalStack integration, refer to this youtube video.
 
-> Only allow indirect write access to the data lake through a Lambda function → ensures consistency.
+- {{< youtube e2mokcAzDCY >}}
 
 ---
 
-## Front Door Microservice
+## Best Practices for Local Testing
 
-- Provides an API Gateway for external REST interaction  
-- Authentication & authorization based on **OIDC** via **Amazon Cognito**  
-- Self-managed *deduplication* mechanism using DynamoDB instead of SNS FIFO because:  
-  1. SNS deduplication TTL is only 5 minutes  
-  2. SNS FIFO requires SQS FIFO  
-  3. Ability to proactively notify the sender that the message is a duplicate  
+To make the most of this new workflow, the article recommends a layered and strategic approach to testing. This involves starting with fast, isolated unit tests to validate core logic, and then progressively moving to broader integration and system-level validation.
 
----
+The recommended testing strategy follows four main steps:
 
-## Staging ER7 Microservice
-
-- Lambda “trigger” subscribed to the pub/sub hub, filtering messages by attribute  
-- Step Functions Express Workflow to convert ER7 → JSON  
-- Two Lambdas:  
-  1. Fix ER7 formatting (newline, carriage return)  
-  2. Parsing logic  
-- Result or error is pushed back into the pub/sub hub  
+1. Begin with local unit tests to focus on isolated function logic.
+2. Proceed to local integration testing using LocalStack to confirm interactions between AWS services.
+3. After local validation, test the application in the actual AWS environment to surface issues that cannot be emulated, such as IAM permission mismatches or VPC networking challenges.
+4. Finally, conduct performance and load testing in AWS to assess how the application handles real-world traffic.
 
 ---
 
-## New Features in the Solution
+## When to Use Local Versus Cloud Testing
 
-### 1. AWS CloudFormation Cross-Stack References
-Example *outputs* in the core microservice:
-```yaml
-Outputs:
-  Bucket:
-    Value: !Ref Bucket
-    Export:
-      Name: !Sub ${AWS::StackName}-Bucket
-  ArtifactBucket:
-    Value: !Ref ArtifactBucket
-    Export:
-      Name: !Sub ${AWS::StackName}-ArtifactBucket
-  Topic:
-    Value: !Ref Topic
-    Export:
-      Name: !Sub ${AWS::StackName}-Topic
-  Catalog:
-    Value: !Ref Catalog
-    Export:
-      Name: !Sub ${AWS::StackName}-Catalog
-  CatalogArn:
-    Value: !GetAtt Catalog.Arn
-    Export:
-      Name: !Sub ${AWS::StackName}-CatalogArn
+While local testing provides significant speed and cost advantages, it's important to understand its limitations and when to test in the cloud. The following table lists potential use cases for each strategy.
+
+| Testing Scenario                        | Local Testing | Cloud Testing | Reason                                                  |
+| --------------------------------------- | ------------- | ------------- | ------------------------------------------------------- |
+| Function logic validation               | ✓             |               | Fast feedback for core business logic                   |
+| Service integration testing             | ✓             |               | Quick validation of AWS service interactions            |
+| Rapid iteration during development      | ✓             |               | Immediate feedback without deployment overhead          |
+| Cost-sensitive development environments | ✓             |               | Minimizes cloud resource costs during development       |
+| Offline development scenarios           | ✓             |               | No internet connectivity required                       |
+| Performance and scalability testing     |               | ✓             | Requires actual AWS infrastructure for accurate results |
+| IAM permission validation               |               | ✓             | LocalStack doesn't fully replicate IAM behavior         |
+| VPC networking scenarios                |               | ✓             | Network configurations can't be accurately emulated     |
+| Production-like load testing            |               | ✓             | Real performance metrics only available in AWS          |
+| Final validation before deployment      |               | ✓             | Supports compatibility with actual AWS environment      |
+
+---
+
+## Conclusion
+
+The integration of LocalStack into the AWS Toolkit for VS Code significantly enhances the local development experience for serverless applications. By allowing developers to run and debug complex, multi-service applications directly in their IDE, this new capability helps reduce context switching, catch issues earlier, and lower development costs. This leads to faster test cycles and higher-quality deployments, all while keeping the developer in full control of their local environment.

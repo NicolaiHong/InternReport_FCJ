@@ -1,126 +1,51 @@
 ---
 title: "Blog 1"
-date: "2025-09-09T19:53:52+07:00"
+date: "2025-10-10"
 weight: 1
 chapter: false
 pre: " <b> 3.1. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-# Getting Started with Healthcare Data Lakes: Using Microservices
+# How We Built a Flywheel to Steadily Improve Security for Amazon RDS
 
-Data lakes can help hospitals and healthcare facilities turn data into business insights, maintain business continuity, and protect patient privacy. A **data lake** is a centralized, managed, and secure repository to store all your data, both in its raw and processed forms for analysis. Data lakes allow you to break down data silos and combine different types of analytics to gain insights and make better business decisions.
+> by Joshua Brindle
 
-This blog post is part of a larger series on getting started with setting up a healthcare data lake. In my final post of the series, *“Getting Started with Healthcare Data Lakes: Diving into Amazon Cognito”*, I focused on the specifics of using Amazon Cognito and Attribute Based Access Control (ABAC) to authenticate and authorize users in the healthcare data lake solution. In this blog, I detail how the solution evolved at a foundational level, including the design decisions I made and the additional features used. You can access the code samples for the solution in this Git repo for reference.
+This blog details the process an AWS security team undertook to secure a new feature, **PL/Rust**, on **Amazon Relational Database Service (Amazon RDS)**. The author, a principal security engineer, explains how the team moved beyond a simple implementation to build a comprehensive, self-improving security system—a "flywheel"—that combines technology, process, and testing to protect customers.
 
 ---
 
-## Architecture Guidance
+## The Pieces of the System
 
-The main change since the last presentation of the overall architecture is the decomposition of a single service into a set of smaller services to improve maintainability and flexibility. Integrating a large volume of diverse healthcare data often requires specialized connectors for each format; by keeping them encapsulated separately as microservices, we can add, remove, and modify each connector without affecting the others. The microservices are loosely coupled via publish/subscribe messaging centered in what I call the “pub/sub hub.”
-
-This solution represents what I would consider another reasonable sprint iteration from my last post. The scope is still limited to the ingestion and basic parsing of **HL7v2 messages** formatted in **Encoding Rules 7 (ER7)** through a REST interface.
-
-**The solution architecture is now as follows:**
-
-> *Figure 1. Overall architecture; colored boxes represent distinct services.*
+The project's central component was **PL/Rust**, an extension that allows users to write custom PostgreSQL functions in **Rust** that are then compiled into highly performant native machine code. The core of this extension is a library called **postgrestd**, which was designed to prevent database escapes. However, at the time, the library was new and had not yet been hardened for the realities of a large-scale production environment.
+<br><br>
+The primary security challenge arose from the fact that PL/Rust compiles these extensions directly on the database instance itself. This design requires a full development toolchain to be locally available, significantly increasing the potential risk. A poorly constructed extension could destabilize the database or its host instance, and attackers could use various techniques to try and bypass security controls like the **write xor execute (W^X)** model. This context made it clear that a series of robust mitigations were necessary to provide this functionality to customers safely.
 
 ---
 
-While the term *microservices* has some inherent ambiguity, certain traits are common:  
-- Small, autonomous, loosely coupled  
-- Reusable, communicating through well-defined interfaces  
-- Specialized to do one thing well  
-- Often implemented in an **event-driven architecture**
+## Challenging the Approach
 
-When determining where to draw boundaries between microservices, consider:  
-- **Intrinsic**: technology used, performance, reliability, scalability  
-- **Extrinsic**: dependent functionality, rate of change, reusability  
-- **Human**: team ownership, managing *cognitive load*
+The AWS culture of obsessing over operational excellence—with a focus on automation, resilience, and simplicity—heavily influenced the search for a solution. The team considered **SELinux (Security-Enhanced Linux)**, which was described as a long-debated option. SELinux is a set of kernel features that enforces **mandatory access control (MAC)**, adding a powerful layer of protection on top of the standard authorization system. Using SELinux policies, an administrator can be extremely specific about what is allowed on a system, for instance, by preventing a process from writing to a file even if its ownership permissions would normally permit it.
+<br><br>
+This level of deterministic control can greatly increase an operating system's security. The trade-off, however, is reduced flexibility and the significant effort required to configure the access controls to meet specific security requirements. After a thorough internal debate, which involved senior leaders challenging the idea to anticipate future issues, the team agreed that for the PL/Rust use case, the benefits of SELinux outweighed the downsides. The decision was made to proceed with this approach.
 
 ---
 
-## Technology Choices and Communication Scope
+## Building the Security Flywheel
 
-| Communication scope                       | Technologies / patterns to consider                                                        |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Within a single microservice              | Amazon Simple Queue Service (Amazon SQS), AWS Step Functions                               |
-| Between microservices in a single service | AWS CloudFormation cross-stack references, Amazon Simple Notification Service (Amazon SNS) |
-| Between services                          | Amazon EventBridge, AWS Cloud Map, Amazon API Gateway                                      |
+Simply implementing a tool wasn't enough; the team built a complete, constantly improving process around it.
 
----
+1.  **Enforce and Monitor**: They built the SELinux environment and created policies to lock down the system. Crucially, they configured these policies to send any **denial messages** to their internal telemetry systems for analysis.
+2.  **Respond**: Working with the internal blue team, they developed specific **incident response playbooks** for the Amazon RDS team to investigate these denial messages.
+3.  **Test and Refine**: The team began running quarterly **"game days"**. During these exercises, the red team would stage exploits against the system, and the service team would respond using their playbooks. Afterwards, all teams would analyze the response to find bottlenecks and areas for improvement.
 
-## The Pub/Sub Hub
-
-Using a **hub-and-spoke** architecture (or message broker) works well with a small number of tightly related microservices.  
-- Each microservice depends only on the *hub*  
-- Inter-microservice connections are limited to the contents of the published message  
-- Reduces the number of synchronous calls since pub/sub is a one-way asynchronous *push*
-
-Drawback: **coordination and monitoring** are needed to avoid microservices processing the wrong message.
+This cycle of enforcement, monitoring, response, and testing created a strong, well-oiled security machine.
 
 ---
 
-## Core Microservice
+## The Flywheel in Action: A Real-World Example
 
-Provides foundational data and communication layer, including:  
-- **Amazon S3** bucket for data  
-- **Amazon DynamoDB** for data catalog  
-- **AWS Lambda** to write messages into the data lake and catalog  
-- **Amazon SNS** topic as the *hub*  
-- **Amazon S3** bucket for artifacts such as Lambda code
+The effectiveness of this system was validated in a production environment. An SELinux denial message automatically generated a high-severity ticket for the service team. The system had worked as expected—it successfully blocked an unauthorized activity, acting as a proactive intrusion detection system.
+<br><br>
+Even though the immediate risk was neutralized, the team's process required them to investigate the root cause to see if the system could be improved further. The investigation eventually revealed that the activity was initiated by the research team at Varonis Threat Labs. AWS security then reached out to them to collaborate, demonstrating how a security event can lead to positive engagement with the research community. This incident provided a concrete and rewarding example of how the team's work directly benefited customers.
 
-> Only allow indirect write access to the data lake through a Lambda function → ensures consistency.
-
----
-
-## Front Door Microservice
-
-- Provides an API Gateway for external REST interaction  
-- Authentication & authorization based on **OIDC** via **Amazon Cognito**  
-- Self-managed *deduplication* mechanism using DynamoDB instead of SNS FIFO because:  
-  1. SNS deduplication TTL is only 5 minutes  
-  2. SNS FIFO requires SQS FIFO  
-  3. Ability to proactively notify the sender that the message is a duplicate  
-
----
-
-## Staging ER7 Microservice
-
-- Lambda “trigger” subscribed to the pub/sub hub, filtering messages by attribute  
-- Step Functions Express Workflow to convert ER7 → JSON  
-- Two Lambdas:  
-  1. Fix ER7 formatting (newline, carriage return)  
-  2. Parsing logic  
-- Result or error is pushed back into the pub/sub hub  
-
----
-
-## New Features in the Solution
-
-### 1. AWS CloudFormation Cross-Stack References
-Example *outputs* in the core microservice:
-```yaml
-Outputs:
-  Bucket:
-    Value: !Ref Bucket
-    Export:
-      Name: !Sub ${AWS::StackName}-Bucket
-  ArtifactBucket:
-    Value: !Ref ArtifactBucket
-    Export:
-      Name: !Sub ${AWS::StackName}-ArtifactBucket
-  Topic:
-    Value: !Ref Topic
-    Export:
-      Name: !Sub ${AWS::StackName}-Topic
-  Catalog:
-    Value: !Ref Catalog
-    Export:
-      Name: !Sub ${AWS::StackName}-Catalog
-  CatalogArn:
-    Value: !GetAtt Catalog.Arn
-    Export:
-      Name: !Sub ${AWS::StackName}-CatalogArn
+> For the security engineers involved, this was deeply validating, as it provided a concrete example of how their proactive work directly benefited customers by preventing a potential issue.
